@@ -7,196 +7,28 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
    LOCATIONS CONFIG
    ═══════════════════════════════════════════ */
 export const LOCATIONS = {
-  school: {
-    key: "school", label: "American High School", icon: "🏫", type: "EDUCATION",
-    position: [-600, 5, -600], camHeight: 380, camDistance: 330,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  hospital: {
-    key: "hospital", label: "Smart Hospital", icon: "🏥", type: "HEALTHCARE",
-    position: [600, 5, -600], camHeight: 380, camDistance: 330,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  society: {
-    key: "society", label: "BSS Smart Society", icon: "🏘", type: "RESIDENTIAL",
-    position: [-600, 5, 600], camHeight: 500, camDistance: 500,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  bank: {
-    key: "bank", label: "Smart City State Bank", icon: "🏦", type: "FINANCIAL",
-    position: [600, 5, 600], camHeight: 380, camDistance: 330,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  nearBank: {
-    key: "nearBank", label: "Near Bank Building", icon: "🏢", type: "COMMERCIAL",
-    position: [750, 5, 750], camHeight: 320, camDistance: 300,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  commercial: {
-    key: "commercial", label: "Commercial Building", icon: "🏬", type: "COMMERCIAL",
-    position: [1000, 5, 400], camHeight: 340, camDistance: 320,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  farm: {
-    key: "farm", label: "Smart Eco Farm", icon: "🌾", type: "AGRICULTURE",
-    position: [1800, 5, -600], camHeight: 420, camDistance: 420,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  newHall: {
-    key: "newHall", label: "Liverpool Event Hall", icon: "🎪", type: "EVENT VENUE",
-    position: [600, 5, 1800], camHeight: 420, camDistance: 420,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  carWash: {
-    key: "carWash", label: "Car Wash · Gas Station", icon: "🚗", type: "AUTOMOTIVE",
-    position: [1800, 5, 1750], camHeight: 420, camDistance: 420,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  powerCompany: {
-    key: "powerCompany", label: "City Power Supply Co.", icon: "🔌", type: "UTILITY",
-    position: [-1600, 5, 800], camHeight: 380, camDistance: 380,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  powerSupply: {
-    key: "powerSupply", label: "Power Supply Zone", icon: "⚡", type: "RENEWABLE",
-    position: [-3600, 5, 3600], camHeight: 800, camDistance: 900,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  filtration: {
-    key: "filtration", label: "Filtration System", icon: "💧", type: "WATER TREATMENT",
-    position: [3600, 5, -3600], camHeight: 420, camDistance: 380,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-      { name: "Inside Machine", inside: true },
-    ],
-  },
-  fertilizer: {
-    key: "fertilizer", label: "AI Fertilizer System", icon: "🌱", type: "FERTILIZER MANAGEMENT",
-    position: [-3600, 5, -3600], camHeight: 450, camDistance: 480,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  wasteManagement: {
-    key: "wasteManagement", label: "Waste Management", icon: "♻", type: "MUNICIPAL",
-    position: [3600, 5, 3600], camHeight: 450, camDistance: 480,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  cultureCenter: {
-    key: "cultureCenter", label: "Culture Center", icon: "🏛", type: "CULTURAL",
-    position: [-1800, 5, 1800], camHeight: 450, camDistance: 450,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  sewageCompany: {
-    key: "sewageCompany", label: "Sewage & Gas Co.", icon: "🏭", type: "INDUSTRIAL",
-    position: [1800, 5, 600], camHeight: 400, camDistance: 400,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  beautifulTower: {
-    key: "beautifulTower", label: "Beautiful Tower", icon: "🗼", type: "SKYLINE",
-    position: [-4000, 5, -1200], camHeight: 600, camDistance: 550,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  twinTowers: {
-    key: "twinTowers", label: "Twin Sci-Fi Towers", icon: "🏙", type: "SKYLINE",
-    position: [-4000, 5, -2000], camHeight: 600, camDistance: 550,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  scifi9: {
-    key: "scifi9", label: "Sci-Fi Building 9", icon: "🛸", type: "SCI-FI",
-    position: [-4000, 5, -400], camHeight: 550, camDistance: 500,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  scifi10: {
-    key: "scifi10", label: "Sci-Fi Building 10", icon: "🚀", type: "SCI-FI",
-    position: [-4000, 5, -2800], camHeight: 550, camDistance: 500,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
-  trafficController: {
-    key: "trafficController", label: "AI Traffic Controller", icon: "🤖", type: "TRANSPORTATION",
-    position: [0, 5, 0], camHeight: 320, camDistance: 280,
-    cameras: [
-      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
-      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
-      { name: "Top View", top: true },
-    ],
-  },
+  school: { key: "school", label: "American High School", icon: "🏫", type: "EDUCATION", position: [-600, 5, -600], camHeight: 380, camDistance: 330, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  hospital: { key: "hospital", label: "Smart Hospital", icon: "🏥", type: "HEALTHCARE", position: [600, 5, -600], camHeight: 380, camDistance: 330, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  society: { key: "society", label: "BSS Smart Society", icon: "🏘", type: "RESIDENTIAL", position: [-600, 5, 600], camHeight: 500, camDistance: 500, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  bank: { key: "bank", label: "Smart City State Bank", icon: "🏦", type: "FINANCIAL", position: [600, 5, 600], camHeight: 380, camDistance: 330, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  nearBank: { key: "nearBank", label: "Near Bank Building", icon: "🏢", type: "COMMERCIAL", position: [750, 5, 750], camHeight: 320, camDistance: 300, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  commercial: { key: "commercial", label: "Commercial Building", icon: "🏬", type: "COMMERCIAL", position: [1000, 5, 400], camHeight: 340, camDistance: 320, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  farm: { key: "farm", label: "Smart Eco Farm", icon: "🌾", type: "AGRICULTURE", position: [1800, 5, -600], camHeight: 420, camDistance: 420, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  newHall: { key: "newHall", label: "Liverpool Event Hall", icon: "🎪", type: "EVENT VENUE", position: [600, 5, 1800], camHeight: 420, camDistance: 420, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  carWash: { key: "carWash", label: "Car Wash · Gas Station", icon: "🚗", type: "AUTOMOTIVE", position: [1800, 5, 1750], camHeight: 420, camDistance: 420, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  powerCompany: { key: "powerCompany", label: "City Power Supply Co.", icon: "🔌", type: "UTILITY", position: [-1600, 5, 800], camHeight: 380, camDistance: 380, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  powerSupply: { key: "powerSupply", label: "Power Supply Zone", icon: "⚡", type: "RENEWABLE", position: [-3600, 5, 3600], camHeight: 800, camDistance: 900, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  filtration: { key: "filtration", label: "Filtration System", icon: "💧", type: "WATER TREATMENT", position: [3600, 5, -3600], camHeight: 420, camDistance: 380, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }, { name: "Inside Machine", inside: true }] },
+  fertilizer: { key: "fertilizer", label: "AI Fertilizer System", icon: "🌱", type: "FERTILIZER MANAGEMENT", position: [-3600, 5, -3600], camHeight: 450, camDistance: 480, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  wasteManagement: { key: "wasteManagement", label: "Waste Management", icon: "♻", type: "MUNICIPAL", position: [3600, 5, 3600], camHeight: 450, camDistance: 480, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  cultureCenter: { key: "cultureCenter", label: "Culture Center", icon: "🏛", type: "CULTURAL", position: [-1800, 5, 1800], camHeight: 450, camDistance: 450, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  sewageCompany: { key: "sewageCompany", label: "Sewage & Gas Co.", icon: "🏭", type: "INDUSTRIAL", position: [1800, 5, 600], camHeight: 400, camDistance: 400, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  beautifulTower: { key: "beautifulTower", label: "Beautiful Tower", icon: "🗼", type: "SKYLINE", position: [-3200, 5, -1000], camHeight: 550, camDistance: 500, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  twinTowers: { key: "twinTowers", label: "Twin Sci-Fi Towers", icon: "🏙", type: "SKYLINE", position: [-3200, 5, -1800], camHeight: 550, camDistance: 500, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  scifi9: { key: "scifi9", label: "Sci-Fi Building 9", icon: "🛸", type: "SCI-FI", position: [-3200, 5, -200], camHeight: 520, camDistance: 480, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  scifi10: { key: "scifi10", label: "Sci-Fi Building 10", icon: "🚀", type: "SCI-FI", position: [-3200, 5, -2600], camHeight: 520, camDistance: 480, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  wasteCollector: { key: "wasteCollector", label: "Waste Collector Point", icon: "🗑", type: "MUNICIPAL", position: [900, 5, 1400], camHeight: 300, camDistance: 280, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
+  trafficController: { key: "trafficController", label: "AI Traffic Controller", icon: "🤖", type: "TRANSPORTATION", position: [0, 5, 0], camHeight: 320, camDistance: 280, cameras: [{ name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI }, { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 }, { name: "Top View", top: true }] },
 };
 
 /* ═══════════════════════════════════════════
@@ -209,9 +41,7 @@ function createCitySimulation(callbacks) {
   function tick(delta) {
     simSec += delta;
     const tt = Math.floor(simSec);
-    callbacks.onSimTime?.(
-      String(Math.floor(tt / 60)).padStart(2, "0") + ":" + String(tt % 60).padStart(2, "0")
-    );
+    callbacks.onSimTime?.(String(Math.floor(tt / 60)).padStart(2, "0") + ":" + String(tt % 60).padStart(2, "0"));
 
     const now = simSec - cycleStart;
     if (tState === 0) {
@@ -238,34 +68,24 @@ function createCitySimulation(callbacks) {
     const t = { state: "", stateColor: "", reason: "", level: "", flow: "", mode: "", incident: "" };
     let aiReason = null;
     if (s === 0) {
-      t.state = "TRAFFIC NORMAL"; t.stateColor = "#63ddff";
-      t.reason = "4-SITE NETWORK OPERATING NORMALLY";
+      t.state = "TRAFFIC NORMAL"; t.stateColor = "#63ddff"; t.reason = "4-SITE NETWORK OPERATING NORMALLY";
       t.level = "NORMAL"; t.flow = "92%"; t.mode = "MONITORING";
       t.incident = "<span>LIVE:</span> Traffic flowing normally";
     } else if (s === 1) {
-      t.state = "TRAFFIC JAM"; t.stateColor = "#ffd15a";
-      t.reason = "QUEUE BUILDING AT CENTRAL INTERSECTION";
+      t.state = "TRAFFIC JAM"; t.stateColor = "#ffd15a"; t.reason = "QUEUE BUILDING AT CENTRAL INTERSECTION";
       t.level = "HEAVY"; t.flow = "28%"; t.mode = "ANALYZING";
       t.incident = "<span>INCIDENT:</span> Cars queuing";
-      aiReason = { visible: true, title: "🔴 PROBLEM DETECTED",
-        text: "<strong>REASON:</strong> Too many cars at central intersection.",
-        result: "AI is <strong>reading the queue</strong> to figure out the best fix." };
+      aiReason = { visible: true, title: "🔴 PROBLEM DETECTED", text: "<strong>REASON:</strong> Too many cars at central intersection.", result: "AI is <strong>reading the queue</strong> to figure out the best fix." };
     } else if (s === 2) {
-      t.state = "AI REROUTING"; t.stateColor = "#67e4ff";
-      t.reason = "AI SPLITTING TRAFFIC TO INNER ROADS";
+      t.state = "AI REROUTING"; t.stateColor = "#67e4ff"; t.reason = "AI SPLITTING TRAFFIC TO INNER ROADS";
       t.level = "RECOVERING"; t.flow = "68%"; t.mode = "OPTIMIZING";
       t.incident = "<span>AI ACTION:</span> Rerouting cars via inner roads";
-      aiReason = { visible: true, title: "🔵 AI IS ACTING",
-        text: "<strong>AI DID THIS:</strong> Flipped signals to green on inner roads and redirected half the cars.",
-        result: "Result: <strong>less cars at intersection → jam clearing.</strong>" };
+      aiReason = { visible: true, title: "🔵 AI IS ACTING", text: "<strong>AI DID THIS:</strong> Flipped signals to green on inner roads and redirected half the cars.", result: "Result: <strong>less cars at intersection → jam clearing.</strong>" };
     } else if (s === 3) {
-      t.state = "TRAFFIC CLEAR"; t.stateColor = "#6aff9d";
-      t.reason = "ALL ROUTES FLOWING NORMALLY";
+      t.state = "TRAFFIC CLEAR"; t.stateColor = "#6aff9d"; t.reason = "ALL ROUTES FLOWING NORMALLY";
       t.level = "CLEAR"; t.flow = "96%"; t.mode = "OPTIMAL";
       t.incident = "<span>SYSTEM:</span> All routes flowing normally";
-      aiReason = { visible: true, title: "🟢 RESOLVED BY AI",
-        text: "<strong>AI RESOLVED IT</strong> by splitting traffic between outer and inner roads.",
-        result: "Jam cleared in <strong>15 seconds</strong>." };
+      aiReason = { visible: true, title: "🟢 RESOLVED BY AI", text: "<strong>AI RESOLVED IT</strong> by splitting traffic between outer and inner roads.", result: "Jam cleared in <strong>15 seconds</strong>." };
     }
     callbacks.onTrafficUpdate?.(t);
     if (s === 0) callbacks.onAiReason?.({ visible: false, title: "", text: "", result: "" });
@@ -279,14 +99,14 @@ function createCitySimulation(callbacks) {
    MAIN 3D COMPONENT
    ═══════════════════════════════════════════ */
 const SmartCity3D = forwardRef((props, ref) => {
-  const { onPanel, onTrafficUpdate, onSimTime, onCycleUpdate, onAiMessage, onAiReason } = props;
+  const { onPanel, onTrafficUpdate, onSimTime, onCycleUpdate, onAiMessage, onAiReason, onTouristMessage } = props;
   const mountRef = useRef(null);
 
   const s = useRef({
     camera: null, controls: null, renderer: null, scene: null,
     isLocked: false, lockedLocation: null, followTarget: null,
     savedCamPos: null, savedCamTarget: null, camTransition: null,
-    trucks: {}, people: [], cityCars: [], trafficLights: [],
+    trucks: {}, people: [], tourists: [], cityCars: [], trafficLights: [],
     turbines: [], streetBulbMats: [], batteryRings: [],
     waterParticles: [], clickable: [],
     controller: null, radar: null, controllerRing: null, controllerRing2: null,
@@ -308,58 +128,30 @@ const SmartCity3D = forwardRef((props, ref) => {
   }));
 
   function smoothCameraTo(targetPos, targetLook, duration = 1400) {
-    s.camTransition = {
-      startPos: s.camera.position.clone(),
-      targetPos,
-      startLook: s.controls.target.clone(),
-      targetLook,
-      startTime: performance.now(),
-      duration,
-    };
+    s.camTransition = { startPos: s.camera.position.clone(), targetPos, startLook: s.controls.target.clone(), targetLook, startTime: performance.now(), duration };
   }
 
   function goToLocation(key, onLabel) {
-    const loc = LOCATIONS[key];
-    if (!loc || !s.camera) return;
+    const loc = LOCATIONS[key]; if (!loc || !s.camera) return;
     s.isLocked = true; s.lockedLocation = key; s.followTarget = null;
-    s.savedCamPos = s.camera.position.clone();
-    s.savedCamTarget = s.controls.target.clone();
+    s.savedCamPos = s.camera.position.clone(); s.savedCamTarget = s.controls.target.clone();
     const [x, y, z] = loc.position;
-    smoothCameraTo(
-      new THREE.Vector3(x + loc.camDistance * 0.7, loc.camHeight, z + loc.camDistance * 0.7),
-      new THREE.Vector3(x, y, z)
-    );
-    s.controls.enableRotate = false;
-    onLabel?.(loc.label);
+    smoothCameraTo(new THREE.Vector3(x + loc.camDistance * 0.7, loc.camHeight, z + loc.camDistance * 0.7), new THREE.Vector3(x, y, z));
+    s.controls.enableRotate = false; onLabel?.(loc.label);
   }
 
   function goToLocationCamera(key, camName, onLabel) {
-    const loc = LOCATIONS[key];
-    if (!loc || !s.camera) return;
-    const cam = loc.cameras.find((c) => c.name === camName);
-    if (!cam) return;
+    const loc = LOCATIONS[key]; if (!loc || !s.camera) return;
+    const cam = loc.cameras.find((c) => c.name === camName); if (!cam) return;
     s.isLocked = true; s.lockedLocation = key; s.followTarget = null;
-    s.savedCamPos = s.camera.position.clone();
-    s.savedCamTarget = s.controls.target.clone();
+    s.savedCamPos = s.camera.position.clone(); s.savedCamTarget = s.controls.target.clone();
     const [x, y, z] = loc.position;
     let camPos, lookAt;
-    if (cam.inside) {
-      camPos = new THREE.Vector3(x - 80, y + 60, z - 80);
-      lookAt = new THREE.Vector3(x, y + 25, z);
-    } else if (cam.top) {
-      camPos = new THREE.Vector3(x, y + loc.camHeight * 1.8, z + 10);
-      lookAt = new THREE.Vector3(x, y, z);
-    } else {
-      camPos = new THREE.Vector3(
-        x + Math.sin(cam.angle) * loc.camDistance,
-        y + loc.camHeight * 0.5,
-        z + Math.cos(cam.angle) * loc.camDistance
-      );
-      lookAt = new THREE.Vector3(x, y, z);
-    }
+    if (cam.inside) { camPos = new THREE.Vector3(x - 80, y + 60, z - 80); lookAt = new THREE.Vector3(x, y + 25, z); }
+    else if (cam.top) { camPos = new THREE.Vector3(x, y + loc.camHeight * 1.8, z + 10); lookAt = new THREE.Vector3(x, y, z); }
+    else { camPos = new THREE.Vector3(x + Math.sin(cam.angle) * loc.camDistance, y + loc.camHeight * 0.5, z + Math.cos(cam.angle) * loc.camDistance); lookAt = new THREE.Vector3(x, y, z); }
     smoothCameraTo(camPos, lookAt);
-    s.controls.enableRotate = false;
-    onLabel?.(loc.label);
+    s.controls.enableRotate = false; onLabel?.(loc.label);
   }
 
   function exitCameraView() {
@@ -376,13 +168,8 @@ const SmartCity3D = forwardRef((props, ref) => {
     else if (key === "fertTruck1") s.followTarget = s.trucks.fert1;
     else if (key === "fertTruck2") s.followTarget = s.trucks.fert2;
     else s.followTarget = null;
-
     if (s.followTarget) {
-      smoothCameraTo(
-        s.followTarget.position.clone().add(new THREE.Vector3(120, 90, 120)),
-        s.followTarget.position.clone(),
-        1200
-      );
+      smoothCameraTo(s.followTarget.position.clone().add(new THREE.Vector3(120, 90, 120)), s.followTarget.position.clone(), 1200);
       onText?.("🎥 FOLLOWING — " + key.toUpperCase());
     } else {
       smoothCameraTo(new THREE.Vector3(0, 2000, 2000), new THREE.Vector3(0, 0, 0), 1500);
@@ -391,19 +178,8 @@ const SmartCity3D = forwardRef((props, ref) => {
     s.controls.enableRotate = true;
   }
 
-  function goToOverview() {
-    if (!s.camera) return;
-    s.isLocked = false; s.lockedLocation = null; s.followTarget = null;
-    s.controls.enableRotate = true;
-    smoothCameraTo(new THREE.Vector3(1400, 950, 1400), new THREE.Vector3(0, 5, 0), 1500);
-  }
-
-  function goToTopDown() {
-    if (!s.camera) return;
-    s.isLocked = false; s.lockedLocation = null; s.followTarget = null;
-    s.controls.enableRotate = true;
-    smoothCameraTo(new THREE.Vector3(0, 2800, 500), new THREE.Vector3(0, 0, 0), 1500);
-  }
+  function goToOverview() { if (!s.camera) return; s.isLocked = false; s.lockedLocation = null; s.followTarget = null; s.controls.enableRotate = true; smoothCameraTo(new THREE.Vector3(1400, 950, 1400), new THREE.Vector3(0, 5, 0), 1500); }
+  function goToTopDown() { if (!s.camera) return; s.isLocked = false; s.lockedLocation = null; s.followTarget = null; s.controls.enableRotate = true; smoothCameraTo(new THREE.Vector3(0, 2800, 500), new THREE.Vector3(0, 0, 0), 1500); }
 
   function setDayNight(night) {
     if (!s.scene) return;
@@ -411,11 +187,9 @@ const SmartCity3D = forwardRef((props, ref) => {
     const NIGHT_BG = new THREE.Color(0x050810);
     if (night) {
       s.scene.background = NIGHT_BG.clone();
-      s.scene.fog = new THREE.Fog(0x050810, 3500, 10000);
       s.ambient.intensity = 0.35; s.sun.intensity = 0.1;
     } else {
       s.scene.background = DAY_BG.clone();
-      s.scene.fog = new THREE.Fog(0xa9dcf4, 3500, 10000);
       s.ambient.intensity = 3.7; s.sun.intensity = 3.5;
     }
     s.grassMaterial.color.setHex(night ? 0x14241a : 0x4d8f50);
@@ -428,46 +202,37 @@ const SmartCity3D = forwardRef((props, ref) => {
   }
 
   useEffect(() => {
-    const container = mountRef.current;
-    if (!container) return;
+    const container = mountRef.current; if (!container) return;
 
-    /* SCENE */
     const scene = new THREE.Scene();
     s.scene = scene;
     scene.background = new THREE.Color(0xa9dcf4);
-    scene.fog = new THREE.Fog(0xa9dcf4, 3500, 10000);
+    /* NO FOG — lag reduce */
 
     const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 5, 15000);
-    camera.position.set(1400, 950, 1400);
-    s.camera = camera;
+    camera.position.set(1400, 950, 1400); s.camera = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    container.appendChild(renderer.domElement);
-    s.renderer = renderer;
+    renderer.shadowMap.enabled = false;  /* No shadows — better FPS */
+    container.appendChild(renderer.domElement); s.renderer = renderer;
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.15;
-    controls.minDistance = 200;
-    controls.maxDistance = 6000;
-    controls.target.set(0, 5, 0);
-    s.controls = controls;
+    controls.enableDamping = true; controls.dampingFactor = 0.15;
+    controls.minDistance = 200; controls.maxDistance = 6000;
+    controls.target.set(0, 5, 0); s.controls = controls;
 
-    /* LIGHTS */
     const ambient = new THREE.HemisphereLight(0xf8fcff, 0x315c38, 3.7);
     scene.add(ambient); s.ambient = ambient;
     const sun = new THREE.DirectionalLight(0xffffff, 3.5);
-    sun.position.set(-800, 1400, 500);
-    scene.add(sun); s.sun = sun;
+    sun.position.set(-800, 1400, 500); scene.add(sun); s.sun = sun;
 
-    /* MATERIALS */
     const mat = (c, r = 0.8, m = 0) => new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
     const grassMaterial = mat(0x4d8f50, 0.98);
-    const roadMaterial = mat(0x20272a, 0.96);
-    const roadLaneMaterial = mat(0x1a2023, 0.96);
+    const roadMaterial = mat(0x2a3238, 0.96);
+    const roadLaneMaterial = mat(0x1e2428, 0.96);
     const yellowLineMaterial = mat(0xf5c84b, 0.65);
     const whiteLineMaterial = mat(0xffffff, 0.65);
     const curbMaterial = mat(0x697578, 0.88);
@@ -479,47 +244,46 @@ const SmartCity3D = forwardRef((props, ref) => {
     s.sidewalkMat = sidewalkMat;
 
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), grassMaterial);
-    ground.rotation.x = -Math.PI / 2;
-    scene.add(ground);
+    ground.rotation.x = -Math.PI / 2; scene.add(ground);
 
     /* ROADS */
-    const ROAD_W = 90, ROAD_HALF = ROAD_W / 2, ROAD_LEN = 9600;
+    const ROAD_W = 110, ROAD_HALF = ROAD_W / 2, ROAD_LEN = 9600;
     const roadZs = [-2400, -1200, 0, 1200, 2400];
     const roadXs = [-2400, -1200, 0, 1200, 2400];
 
     function makeRoadE(x, z, length) {
-      const shoulder = new THREE.Mesh(new THREE.BoxGeometry(length, 0.25, ROAD_W + 10), roadLaneMaterial);
+      const shoulder = new THREE.Mesh(new THREE.BoxGeometry(length, 0.25, ROAD_W + 20), roadLaneMaterial);
       shoulder.position.set(x, 4.55, z); scene.add(shoulder);
       const r = new THREE.Mesh(new THREE.BoxGeometry(length, 0.45, ROAD_W), roadMaterial);
       r.position.set(x, 4.7, z); scene.add(r);
-      const c1 = new THREE.Mesh(new THREE.BoxGeometry(length, 0.1, 1.6), yellowLineMaterial);
-      c1.position.set(x, 5, z - 2); scene.add(c1);
-      const c2 = c1.clone(); c2.position.z = z + 2; scene.add(c2);
-      const topLine = new THREE.Mesh(new THREE.BoxGeometry(length, 0.08, 1.2), whiteLineMaterial);
-      topLine.position.set(x, 5.05, z + ROAD_HALF - 5); scene.add(topLine);
-      const botLine = topLine.clone(); botLine.position.z = z - ROAD_HALF + 5; scene.add(botLine);
-      for (let lx = x - length / 2 + 20; lx < x + length / 2 - 10; lx += 55) {
-        const d1 = new THREE.Mesh(new THREE.BoxGeometry(25, 0.09, 0.6), whiteLineMaterial);
-        d1.position.set(lx, 5.06, z + ROAD_HALF / 2); scene.add(d1);
-        const d2 = d1.clone(); d2.position.z = z - ROAD_HALF / 2; scene.add(d2);
+      const c1 = new THREE.Mesh(new THREE.BoxGeometry(length, 0.1, 2), yellowLineMaterial);
+      c1.position.set(x, 5, z - 2.5); scene.add(c1);
+      const c2 = c1.clone(); c2.position.z = z + 2.5; scene.add(c2);
+      const topLine = new THREE.Mesh(new THREE.BoxGeometry(length, 0.08, 1.5), whiteLineMaterial);
+      topLine.position.set(x, 5.05, z + ROAD_HALF - 6); scene.add(topLine);
+      const botLine = topLine.clone(); botLine.position.z = z - ROAD_HALF + 6; scene.add(botLine);
+      for (let lx = x - length / 2 + 30; lx < x + length / 2 - 20; lx += 70) {
+        const d1 = new THREE.Mesh(new THREE.BoxGeometry(30, 0.09, 0.8), whiteLineMaterial);
+        d1.position.set(lx, 5.06, z + 30); scene.add(d1);
+        const d2 = d1.clone(); d2.position.z = z - 30; scene.add(d2);
       }
     }
 
     function makeRoadN(x, z, length) {
-      const shoulder = new THREE.Mesh(new THREE.BoxGeometry(ROAD_W + 10, 0.25, length), roadLaneMaterial);
+      const shoulder = new THREE.Mesh(new THREE.BoxGeometry(ROAD_W + 20, 0.25, length), roadLaneMaterial);
       shoulder.position.set(x, 4.55, z); scene.add(shoulder);
       const r = new THREE.Mesh(new THREE.BoxGeometry(ROAD_W, 0.45, length), roadMaterial);
       r.position.set(x, 4.7, z); scene.add(r);
-      const c1 = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.1, length), yellowLineMaterial);
-      c1.position.set(x - 2, 5, z); scene.add(c1);
-      const c2 = c1.clone(); c2.position.x = x + 2; scene.add(c2);
-      const leftLine = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.08, length), whiteLineMaterial);
-      leftLine.position.set(x - ROAD_HALF + 5, 5.05, z); scene.add(leftLine);
-      const rightLine = leftLine.clone(); rightLine.position.x = x + ROAD_HALF - 5; scene.add(rightLine);
-      for (let lz = z - length / 2 + 20; lz < z + length / 2 - 10; lz += 55) {
-        const d1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.09, 25), whiteLineMaterial);
-        d1.position.set(x + ROAD_HALF / 2, 5.06, lz); scene.add(d1);
-        const d2 = d1.clone(); d2.position.x = x - ROAD_HALF / 2; scene.add(d2);
+      const c1 = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, length), yellowLineMaterial);
+      c1.position.set(x - 2.5, 5, z); scene.add(c1);
+      const c2 = c1.clone(); c2.position.x = x + 2.5; scene.add(c2);
+      const leftLine = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.08, length), whiteLineMaterial);
+      leftLine.position.set(x - ROAD_HALF + 6, 5.05, z); scene.add(leftLine);
+      const rightLine = leftLine.clone(); rightLine.position.x = x + ROAD_HALF - 6; scene.add(rightLine);
+      for (let lz = z - length / 2 + 30; lz < z + length / 2 - 20; lz += 70) {
+        const d1 = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.09, 30), whiteLineMaterial);
+        d1.position.set(x + 30, 5.06, lz); scene.add(d1);
+        const d2 = d1.clone(); d2.position.x = x - 30; scene.add(d2);
       }
     }
 
@@ -527,69 +291,45 @@ const SmartCity3D = forwardRef((props, ref) => {
     roadXs.forEach((x) => makeRoadN(x, 0, ROAD_LEN));
 
     roadZs.forEach((z) => {
-      const s1 = new THREE.Mesh(new THREE.BoxGeometry(ROAD_LEN, 0.3, 8), sidewalkMat);
-      s1.position.set(0, 5.05, z + ROAD_HALF + 8); scene.add(s1);
-      const s2 = s1.clone(); s2.position.z = z - ROAD_HALF - 8; scene.add(s2);
+      const s1 = new THREE.Mesh(new THREE.BoxGeometry(ROAD_LEN, 0.3, 10), sidewalkMat);
+      s1.position.set(0, 5.05, z + ROAD_HALF + 10); scene.add(s1);
+      const s2 = s1.clone(); s2.position.z = z - ROAD_HALF - 10; scene.add(s2);
     });
     roadXs.forEach((x) => {
-      const s1 = new THREE.Mesh(new THREE.BoxGeometry(8, 0.3, ROAD_LEN), sidewalkMat);
-      s1.position.set(x + ROAD_HALF + 8, 5.05, 0); scene.add(s1);
-      const s2 = s1.clone(); s2.position.x = x - ROAD_HALF - 8; scene.add(s2);
+      const s1 = new THREE.Mesh(new THREE.BoxGeometry(10, 0.3, ROAD_LEN), sidewalkMat);
+      s1.position.set(x + ROAD_HALF + 10, 5.05, 0); scene.add(s1);
+      const s2 = s1.clone(); s2.position.x = x - ROAD_HALF - 10; scene.add(s2);
     });
 
-    /* BORDER */
-    function buildingBorder(x, z, w, d, color = 0x22cfff) {
-      const bMat = new THREE.MeshStandardMaterial({
-        color, emissive: color, emissiveIntensity: 1.8, metalness: 0.6, roughness: 0.25,
-      });
-      const front = new THREE.Mesh(new THREE.BoxGeometry(w + 12, 1.6, 4), bMat);
-      front.position.set(x, 6, z + d / 2 + 6); scene.add(front);
-      const back = front.clone(); back.position.z = z - d / 2 - 6; scene.add(back);
-      const left = new THREE.Mesh(new THREE.BoxGeometry(4, 1.6, d + 12), bMat);
-      left.position.set(x - w / 2 - 6, 6, z); scene.add(left);
-      const right = left.clone(); right.position.x = x + w / 2 + 6; scene.add(right);
-      for (const cx of [-1, 1]) for (const cz of [-1, 1]) {
-        const p = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 3, 12, 8), bMat);
-        p.position.set(x + cx * (w / 2 + 6), 11, z + cz * (d / 2 + 6)); scene.add(p);
-        const cap = new THREE.Mesh(new THREE.SphereGeometry(2.2, 8, 8),
-          new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: color, emissiveIntensity: 3 }));
-        cap.position.set(x + cx * (w / 2 + 6), 18, z + cz * (d / 2 + 6)); scene.add(cap);
-      }
-    }
+    /* ❌ NO buildingBorder() — REMOVED */
 
     /* BOARD */
     function board(text, x, y, z, w = 80, h = 12, color) {
-      const g = new THREE.Group();
-      g.position.set(x, y, z);
+      const g = new THREE.Group(); g.position.set(x, y, z);
       const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, 14, 6), darkMaterial);
       pole.position.y = 7; g.add(pole);
       const bMat = color ? mat(color, 0.35, 0.25) : blueMaterial;
       const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.9), bMat);
       b.position.y = 12; g.add(b);
-      const c = document.createElement("canvas");
-      c.width = 1400; c.height = 350;
+      const c = document.createElement("canvas"); c.width = 1400; c.height = 350;
       const ctx = c.getContext("2d");
       ctx.fillStyle = color ? "#" + color.toString(16).padStart(6, "0") : "#075c7b";
       ctx.fillRect(0, 0, 1400, 350);
       ctx.strokeStyle = "#78e9ff"; ctx.lineWidth = 12;
       ctx.strokeRect(10, 10, 1380, 330);
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 82px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = "#ffffff"; ctx.font = "bold 82px Arial";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.fillText(text, 700, 175);
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      const sMesh = new THREE.Mesh(new THREE.PlaneGeometry(w - 1, h - 0.8),
-        new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }));
+      const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+      const sMesh = new THREE.Mesh(new THREE.PlaneGeometry(w - 1, h - 0.8), new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }));
       sMesh.position.set(0, 12, 0.5); g.add(sMesh);
       scene.add(g);
     }
 
     /* STREET LIGHTS */
-    const streetBulbMats = [];
-    s.streetBulbMats = streetBulbMats;
+    const streetBulbMats = []; s.streetBulbMats = streetBulbMats;
     function sl(x, z) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
+      const g = new THREE.Group(); g.position.set(x, 5, z);
       const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.3, 11, 5), darkMaterial);
       pole.position.y = 5.5; g.add(pole);
       const arm = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.22, 0.22), darkMaterial);
@@ -597,26 +337,22 @@ const SmartCity3D = forwardRef((props, ref) => {
       const bMat = new THREE.MeshStandardMaterial({ color: 0xfff2b0, emissive: 0xffd36a, emissiveIntensity: 0.9 });
       const b = new THREE.Mesh(new THREE.SphereGeometry(0.55, 8, 8), bMat);
       b.position.set(3, 9.8, 0); g.add(b);
-      scene.add(g);
-      streetBulbMats.push(bMat);
+      scene.add(g); streetBulbMats.push(bMat);
     }
     roadZs.forEach((z) => {
-      for (let x = -4500; x <= 4500; x += 350) { sl(x, z + ROAD_HALF + 16); sl(x, z - ROAD_HALF - 16); }
+      for (let x = -4500; x <= 4500; x += 400) { sl(x, z + ROAD_HALF + 18); sl(x, z - ROAD_HALF - 18); }
     });
 
     /* TRAFFIC LIGHTS */
-    const trafficLights = [];
-    s.trafficLights = trafficLights;
+    const trafficLights = []; s.trafficLights = trafficLights;
     function tl(x, z) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
+      const g = new THREE.Group(); g.position.set(x, 5, z);
       const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.25, 9, 5), darkMaterial);
       pole.position.y = 4.5; g.add(pole);
       const box = new THREE.Mesh(new THREE.BoxGeometry(1.6, 5, 1.4), darkMaterial);
       box.position.y = 7.5; g.add(box);
       const light = (color, y) => {
-        const m = new THREE.Mesh(new THREE.SphereGeometry(0.35, 8, 8),
-          new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0 }));
+        const m = new THREE.Mesh(new THREE.SphereGeometry(0.35, 8, 8), new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0 }));
         m.position.set(0, y, 0.75); g.add(m); return m;
       };
       const r = light(0xff2222, 8.8);
@@ -628,49 +364,30 @@ const SmartCity3D = forwardRef((props, ref) => {
     roadXs.forEach((x) => roadZs.forEach((z) => tl(x, z)));
 
     /* AI CONTROLLER */
-    const controller = new THREE.Group();
-    s.controller = controller;
+    const controller = new THREE.Group(); s.controller = controller;
     controller.position.set(0, 5, 0);
     const controllerBase = new THREE.Mesh(new THREE.CylinderGeometry(55, 62, 3, 24), mat(0x142f3b, 0.28, 0.4));
     controllerBase.position.y = 1.5; controller.add(controllerBase);
-    const controllerRing = new THREE.Mesh(new THREE.TorusGeometry(53, 1.2, 8, 36),
-      new THREE.MeshStandardMaterial({ color: 0x32dfff, emissive: 0x18cfff, emissiveIntensity: 2.2 }));
-    controllerRing.rotation.x = Math.PI / 2; controllerRing.position.y = 3.2; controller.add(controllerRing);
-    s.controllerRing = controllerRing;
-    const controllerRing2 = new THREE.Mesh(new THREE.TorusGeometry(44, 0.8, 8, 36),
-      new THREE.MeshStandardMaterial({ color: 0x22bfff, emissive: 0x0a9fdf, emissiveIntensity: 1.8 }));
-    controllerRing2.rotation.x = Math.PI / 2; controllerRing2.position.y = 5; controller.add(controllerRing2);
-    s.controllerRing2 = controllerRing2;
+    const controllerRing = new THREE.Mesh(new THREE.TorusGeometry(53, 1.2, 8, 36), new THREE.MeshStandardMaterial({ color: 0x32dfff, emissive: 0x18cfff, emissiveIntensity: 2.2 }));
+    controllerRing.rotation.x = Math.PI / 2; controllerRing.position.y = 3.2; controller.add(controllerRing); s.controllerRing = controllerRing;
+    const controllerRing2 = new THREE.Mesh(new THREE.TorusGeometry(44, 0.8, 8, 36), new THREE.MeshStandardMaterial({ color: 0x22bfff, emissive: 0x0a9fdf, emissiveIntensity: 1.8 }));
+    controllerRing2.rotation.x = Math.PI / 2; controllerRing2.position.y = 5; controller.add(controllerRing2); s.controllerRing2 = controllerRing2;
     const controllerTower = new THREE.Mesh(new THREE.BoxGeometry(22, 40, 22), mat(0x185a72, 0.25, 0.35));
     controllerTower.position.y = 22; controller.add(controllerTower);
-    const controllerUpper = new THREE.Mesh(new THREE.BoxGeometry(18, 14, 18),
-      new THREE.MeshStandardMaterial({ color: 0x0a3345, emissive: 0x1a7a9a, emissiveIntensity: 1.8 }));
+    const controllerUpper = new THREE.Mesh(new THREE.BoxGeometry(18, 14, 18), new THREE.MeshStandardMaterial({ color: 0x0a3345, emissive: 0x1a7a9a, emissiveIntensity: 1.8 }));
     controllerUpper.position.y = 44; controller.add(controllerUpper);
-    [
-      { x: 0, y: 22, z: 12, ry: 0 },
-      { x: 0, y: 22, z: -12, ry: Math.PI },
-      { x: 12, y: 22, z: 0, ry: Math.PI / 2 },
-      { x: -12, y: 22, z: 0, ry: -Math.PI / 2 },
-    ].forEach((sp) => {
+    [{ x: 0, y: 22, z: 12, ry: 0 }, { x: 0, y: 22, z: -12, ry: Math.PI }, { x: 12, y: 22, z: 0, ry: Math.PI / 2 }, { x: -12, y: 22, z: 0, ry: -Math.PI / 2 }].forEach((sp) => {
       const m = new THREE.MeshStandardMaterial({ color: 0x03141b, emissive: 0x21cfff, emissiveIntensity: 2.6 });
       const sMesh = new THREE.Mesh(new THREE.BoxGeometry(10, 7.5, 0.4), m);
-      sMesh.position.set(sp.x, sp.y, sp.z); sMesh.rotation.y = sp.ry;
-      controller.add(sMesh);
+      sMesh.position.set(sp.x, sp.y, sp.z); sMesh.rotation.y = sp.ry; controller.add(sMesh);
     });
-    const radar = new THREE.Mesh(new THREE.TorusGeometry(8, 0.5, 8, 32),
-      new THREE.MeshStandardMaterial({ color: 0x61e7ff, emissive: 0x23dfff, emissiveIntensity: 2.5 }));
-    radar.rotation.x = Math.PI / 2; radar.position.y = 53; controller.add(radar);
-    s.radar = radar;
-    const controllerSig = new THREE.Mesh(new THREE.SphereGeometry(2.2, 12, 12),
-      new THREE.MeshStandardMaterial({ color: 0x66e5ff, emissive: 0x33dfff, emissiveIntensity: 3.5 }));
-    controllerSig.position.y = 68; controller.add(controllerSig);
-    s.controllerSig = controllerSig;
+    const radar = new THREE.Mesh(new THREE.TorusGeometry(8, 0.5, 8, 32), new THREE.MeshStandardMaterial({ color: 0x61e7ff, emissive: 0x23dfff, emissiveIntensity: 2.5 }));
+    radar.rotation.x = Math.PI / 2; radar.position.y = 53; controller.add(radar); s.radar = radar;
+    const controllerSig = new THREE.Mesh(new THREE.SphereGeometry(2.2, 12, 12), new THREE.MeshStandardMaterial({ color: 0x66e5ff, emissive: 0x33dfff, emissiveIntensity: 3.5 }));
+    controllerSig.position.y = 68; controller.add(controllerSig); s.controllerSig = controllerSig;
     scene.add(controller);
 
-    /* GLB LOADER */
-    const loader = new GLTFLoader();
-    const clickable = [];
-    s.clickable = clickable;
+    const loader = new GLTFLoader(); const clickable = []; s.clickable = clickable;
 
     function removeGroundFromGLB(model) {
       const toRemove = [];
@@ -697,7 +414,8 @@ const SmartCity3D = forwardRef((props, ref) => {
       obj.position.x -= c.x; obj.position.z -= c.z; obj.position.y -= b2.min.y;
     }
 
-    function bld(file, size, pos, type, name, borderColor, stripGround = true) {
+    /* ❌ NO BORDER OPTION — simple bld() */
+    function bld(file, size, pos, type, name, _borderColor, stripGround = true) {
       const url = file.startsWith("/") ? file : "/" + file;
       loader.load(
         url,
@@ -707,133 +425,51 @@ const SmartCity3D = forwardRef((props, ref) => {
           b.position.set(pos[0], 5, pos[1]);
           scene.add(b);
           clickable.push({ object: b, type, name: name || type });
-          buildingBorder(pos[0], pos[1], size * 1.4, size * 1.4, borderColor || 0x22cfff);
         },
         undefined,
         (err) => console.warn("GLB load failed:", url, err)
       );
     }
 
-    /* ═══════════════════════════════════════════
-       NATURE — BADE, STYLED TREES
-       ═══════════════════════════════════════════ */
+    /* NATURE */
     const treeTrunkMat = mat(0x5a3d24, 0.95, 0.05);
-    const treeTrunkMat2 = mat(0x6b4a2f, 0.95, 0.05);
     const treeLeafMat = mat(0x2d6e3d, 0.9);
     const treeLeafMat2 = mat(0x3a8a4c, 0.9);
     const treeLeafMat3 = mat(0x1f5a2e, 0.9);
     const treeLeafMat4 = mat(0x4a9d5a, 0.9);
-    const treeLeafMat5 = mat(0x2a8a3a, 0.9);
-
-    const treeTrunkGeo1 = new THREE.CylinderGeometry(2.2, 3.5, 28, 7);
-    const treeTrunkGeo2 = new THREE.CylinderGeometry(1.8, 3, 24, 6);
-
+    const treeTrunkGeo = new THREE.CylinderGeometry(2.2, 3.5, 28, 7);
     const treeLeafCone = new THREE.ConeGeometry(18, 42, 8);
     const treeLeafConeSmall = new THREE.ConeGeometry(14, 32, 7);
-    const treeLeafSphere = new THREE.SphereGeometry(15, 9, 8);
     const treeLeafSphereBig = new THREE.SphereGeometry(18, 10, 9);
-    const treeLeafCube = new THREE.BoxGeometry(20, 22, 20);
 
     function tree(x, z, sc = 1) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
-      g.scale.setScalar(sc);
-
-      const trunkMat = Math.random() > 0.5 ? treeTrunkMat : treeTrunkMat2;
+      const g = new THREE.Group(); g.position.set(x, 5, z); g.scale.setScalar(sc);
+      const t = new THREE.Mesh(treeTrunkGeo, treeTrunkMat); t.position.y = 14; g.add(t);
       const roll = Math.random();
-      const leafRoll = Math.random();
-
-      if (roll < 0.35) {
-        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
-        t.position.y = 14; g.add(t);
-        const l1 = new THREE.Mesh(treeLeafCone, treeLeafMat);
-        l1.position.y = 38; g.add(l1);
-        const l2 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat2);
-        l2.position.y = 52; l2.scale.setScalar(0.75); g.add(l2);
-        const l3 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat3);
-        l3.position.y = 62; l3.scale.setScalar(0.5); g.add(l3);
-      } else if (roll < 0.6) {
-        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
-        t.position.y = 14; g.add(t);
-        const l = new THREE.Mesh(treeLeafSphereBig, leafRoll > 0.5 ? treeLeafMat : treeLeafMat4);
-        l.position.y = 40; l.scale.set(1.2, 1.1, 1.2); g.add(l);
-        const l2 = new THREE.Mesh(treeLeafSphere, treeLeafMat2);
-        l2.position.set(8, 34, 4); l2.scale.setScalar(0.7); g.add(l2);
-        const l3 = new THREE.Mesh(treeLeafSphere, treeLeafMat3);
-        l3.position.set(-6, 36, -5); l3.scale.setScalar(0.65); g.add(l3);
-      } else if (roll < 0.8) {
-        const t = new THREE.Mesh(treeTrunkGeo2, trunkMat);
-        t.position.y = 12; g.add(t);
-        const l1 = new THREE.Mesh(treeLeafCone, treeLeafMat5);
-        l1.position.y = 34; l1.scale.setScalar(0.9); g.add(l1);
-        const l2 = new THREE.Mesh(treeLeafCone, treeLeafMat);
-        l2.position.y = 46; l2.scale.setScalar(0.75); g.add(l2);
-        const l3 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat2);
-        l3.position.y = 58; l3.scale.setScalar(0.55); g.add(l3);
-        const l4 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat4);
-        l4.position.y = 68; l4.scale.setScalar(0.35); g.add(l4);
+      if (roll < 0.5) {
+        const l = new THREE.Mesh(treeLeafCone, treeLeafMat); l.position.y = 38; g.add(l);
+        const l2 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat2); l2.position.y = 52; l2.scale.setScalar(0.75); g.add(l2);
       } else {
-        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
-        t.position.y = 14; g.add(t);
-        const l1 = new THREE.Mesh(treeLeafSphereBig, treeLeafMat);
-        l1.position.y = 42; l1.scale.set(1.3, 1, 1.3); g.add(l1);
-        const l2 = new THREE.Mesh(treeLeafSphere, treeLeafMat2);
-        l2.position.set(10, 38, 0); l2.scale.setScalar(0.85); g.add(l2);
-        const l3 = new THREE.Mesh(treeLeafSphere, treeLeafMat4);
-        l3.position.set(-10, 38, 0); l3.scale.setScalar(0.85); g.add(l3);
-        const l4 = new THREE.Mesh(treeLeafSphere, treeLeafMat3);
-        l4.position.set(0, 38, 10); l4.scale.setScalar(0.85); g.add(l4);
-        const l5 = new THREE.Mesh(treeLeafSphere, treeLeafMat5);
-        l5.position.set(0, 38, -10); l5.scale.setScalar(0.85); g.add(l5);
-        const l6 = new THREE.Mesh(treeLeafCube, treeLeafMat2);
-        l6.position.set(0, 52, 0); l6.rotation.y = Math.PI / 4; l6.scale.setScalar(0.75); g.add(l6);
+        const l = new THREE.Mesh(treeLeafSphereBig, treeLeafMat4); l.position.y = 40; l.scale.set(1.2, 1.1, 1.2); g.add(l);
+        const l2 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat3); l2.position.y = 55; l2.scale.setScalar(0.6); g.add(l2);
       }
-
       scene.add(g);
     }
 
     function bush(x, z, sc = 1) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z); g.scale.setScalar(sc);
+      const g = new THREE.Group(); g.position.set(x, 5, z); g.scale.setScalar(sc);
       const colors = [0x2d6e3d, 0x3a8a4c, 0x1f5a2e, 0x4a9d5a];
-      for (let i = 0; i < 5; i++) {
-        const b = new THREE.Mesh(new THREE.SphereGeometry(4 + Math.random() * 3, 7, 6),
+      for (let i = 0; i < 3; i++) {
+        const b = new THREE.Mesh(new THREE.SphereGeometry(4 + Math.random() * 3, 6, 5),
           mat(colors[Math.floor(Math.random() * colors.length)], 0.95));
-        b.position.set((Math.random() - 0.5) * 7, 4 + Math.random() * 3, (Math.random() - 0.5) * 7);
+        b.position.set((Math.random() - 0.5) * 6, 4 + Math.random() * 2, (Math.random() - 0.5) * 6);
         g.add(b);
       }
       scene.add(g);
     }
 
-    function rock(x, z, sc = 1) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z); g.scale.setScalar(sc);
-      const colors = [0x8a8a8a, 0x6b6b6b, 0x9a9a95, 0x7a7a72];
-      for (let i = 0; i < 3; i++) {
-        const r = new THREE.Mesh(new THREE.DodecahedronGeometry(3 + Math.random() * 2, 0),
-          mat(colors[Math.floor(Math.random() * colors.length)], 0.95));
-        r.position.set((Math.random() - 0.5) * 6, 3 + Math.random() * 2, (Math.random() - 0.5) * 6);
-        r.rotation.set(Math.random() * 3, Math.random() * 3, Math.random() * 3);
-        g.add(r);
-      }
-      scene.add(g);
-    }
-
-    function grassTuft(x, z) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
-      const gm = mat(0x3a8a4c, 0.95);
-      for (let i = 0; i < 7; i++) {
-        const blade = new THREE.Mesh(new THREE.ConeGeometry(0.5, 3 + Math.random() * 2, 3), gm);
-        blade.position.set((Math.random() - 0.5) * 3, 1.5, (Math.random() - 0.5) * 3);
-        blade.rotation.z = (Math.random() - 0.5) * 0.4;
-        g.add(blade);
-      }
-      scene.add(g);
-    }
-
     function isOnRoad(x, z) {
-      const clear = 120;
+      const clear = 130;
       for (const rz of roadZs) if (Math.abs(z - rz) < clear) return true;
       for (const rx of roadXs) if (Math.abs(x - rx) < clear) return true;
       return false;
@@ -849,14 +485,11 @@ const SmartCity3D = forwardRef((props, ref) => {
       { x: -3600, z: -3600, r: 600 }, { x: 3600, z: 3600, r: 600 },
       { x: -1800, z: 1800, r: 400 },
       { x: -600, z: 600, r: 500 },
-      /* NAYI GLB positions */
-      { x: 750, z: 750, r: 200 },
-      { x: 1000, z: 400, r: 220 },
+      { x: 750, z: 750, r: 200 }, { x: 1000, z: 400, r: 220 },
       { x: -1600, z: 800, r: 260 },
-      { x: -4000, z: -1200, r: 400 },
-      { x: -4000, z: -2000, r: 400 },
-      { x: -4000, z: -400, r: 350 },
-      { x: -4000, z: -2800, r: 350 },
+      { x: -3200, z: -1000, r: 400 }, { x: -3200, z: -1800, r: 400 },
+      { x: -3200, z: -200, r: 350 }, { x: -3200, z: -2600, r: 350 },
+      { x: 900, z: 1400, r: 250 },
     ];
     function isOnBuilding(x, z) {
       for (const o of occupiedSpots) {
@@ -867,131 +500,71 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
     function isFree(x, z) { return !isOnRoad(x, z) && !isOnBuilding(x, z); }
 
-    /* ═══════════════════════════════════════════
-       TOWER COLORS
-       ═══════════════════════════════════════════ */
     const TOWER_COLORS = [
       0x5b9bd5, 0x4a90e2, 0x7bb3e0, 0x6ba3d9, 0x82c0e8, 0x5090d0,
-      0xc0629b, 0xd475a8, 0xb84f8a, 0xe087b6,
-      0xf5a623, 0xf7b955, 0xe89b3e, 0xffc866,
-      0x6cd4a0, 0x4ec39a, 0x8adbb8, 0x5bc08a,
-      0x9b7ad9, 0xaa8ae0, 0x8a66c9, 0xbaa0e8,
-      0xe8635c, 0xd94f4a, 0xf0776b,
-      0x4a4a5c, 0x5a5a6e, 0x3d3d4e, 0x6a6a7e,
-      0xdde0e3, 0xc8ccd0, 0xb0b5bb,
-      0x22a5b8, 0x2bb8c9, 0x40c9d9,
+      0xc0629b, 0xd475a8, 0xb84f8a, 0xe087b6, 0xf5a623, 0xf7b955,
+      0xe89b3e, 0xffc866, 0x6cd4a0, 0x4ec39a, 0x8adbb8, 0x5bc08a,
+      0x9b7ad9, 0xaa8ae0, 0x8a66c9, 0xbaa0e8, 0xe8635c, 0xd94f4a,
+      0xf0776b, 0x4a4a5c, 0x5a5a6e, 0x3d3d4e, 0x6a6a7e, 0xdde0e3,
+      0xc8ccd0, 0xb0b5bb, 0x22a5b8, 0x2bb8c9, 0x40c9d9,
     ];
 
     function tallTower(x, z, w, h, d, color) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
-
+      const g = new THREE.Group(); g.position.set(x, 5, z);
       const bMat = mat(color, 0.4, 0.55);
       const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bMat);
-      body.position.y = h / 2;
-      g.add(body);
-
-      const capMat = mat(0x2a2a35, 0.5, 0.6);
-      const cap = new THREE.Mesh(new THREE.BoxGeometry(w * 0.95, 6, d * 0.95), capMat);
-      cap.position.y = h + 3;
-      g.add(cap);
-
-      if (Math.random() > 0.3) {
-        const antH = 30 + Math.random() * 50;
-        const antMat = mat(0x9a9a9a, 0.4, 0.8);
-        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, antH, 6), antMat);
-        ant.position.y = h + 6 + antH / 2;
-        g.add(ant);
-
-        const beacon = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8),
-          new THREE.MeshStandardMaterial({ color: 0xff2222, emissive: 0xff2222, emissiveIntensity: 4 }));
-        beacon.position.y = h + 6 + antH;
-        g.add(beacon);
+      body.position.y = h / 2; g.add(body);
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(w * 0.95, 6, d * 0.95), mat(0x2a2a35, 0.5, 0.6));
+      cap.position.y = h + 3; g.add(cap);
+      if (Math.random() > 0.4) {
+        const antH = 30 + Math.random() * 40;
+        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, antH, 6), mat(0x9a9a9a, 0.4, 0.8));
+        ant.position.y = h + 6 + antH / 2; g.add(ant);
+        const beacon = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), new THREE.MeshStandardMaterial({ color: 0xff2222, emissive: 0xff2222, emissiveIntensity: 4 }));
+        beacon.position.y = h + 6 + antH; g.add(beacon);
       }
-
-      const glassMat = new THREE.MeshStandardMaterial({
-        color: 0x1a2a3a, emissive: 0x66ccff, emissiveIntensity: 0.5,
-        metalness: 0.6, roughness: 0.2,
-      });
-
-      const floors = Math.max(8, Math.floor(h / 12));
-      for (let f = 1; f < floors; f++) {
-        const fy = (h / floors) * f;
-        const line = new THREE.Mesh(new THREE.BoxGeometry(w + 0.5, 0.5, d + 0.5), glassMat);
-        line.position.y = fy;
-        g.add(line);
+      /* Only 3 window lines instead of 8-12 — lag reduce */
+      const glassMat = new THREE.MeshStandardMaterial({ color: 0x1a2a3a, emissive: 0x66ccff, emissiveIntensity: 0.5, metalness: 0.6, roughness: 0.2 });
+      const floorLines = 4;
+      for (let f = 1; f <= floorLines; f++) {
+        const fy = (h / (floorLines + 1)) * f;
+        const line = new THREE.Mesh(new THREE.BoxGeometry(w + 0.5, 0.6, d + 0.5), glassMat);
+        line.position.y = fy; g.add(line);
       }
-
-      const stripeMat = new THREE.MeshStandardMaterial({
-        color: color, emissive: color, emissiveIntensity: 0.8,
-        metalness: 0.7, roughness: 0.2,
-      });
-      const stripe1 = new THREE.Mesh(new THREE.BoxGeometry(1.2, h * 0.95, 0.6), stripeMat);
-      stripe1.position.set(-w / 2 - 0.2, h / 2, 0);
-      g.add(stripe1);
-      const stripe2 = stripe1.clone();
-      stripe2.position.x = w / 2 + 0.2;
-      g.add(stripe2);
-
-      const lightColor = [0xff6666, 0x66ff99, 0x66aaff, 0xffdd66, 0xff66dd][Math.floor(Math.random() * 5)];
-      const spot = new THREE.Mesh(new THREE.SphereGeometry(2, 10, 10),
-        new THREE.MeshStandardMaterial({ color: lightColor, emissive: lightColor, emissiveIntensity: 3 }));
-      spot.position.y = h + 8;
-      g.add(spot);
-
+      const lightColor = [0xff6666, 0x66ff99, 0x66aaff, 0xffdd66][Math.floor(Math.random() * 4)];
+      const spot = new THREE.Mesh(new THREE.SphereGeometry(2, 8, 8), new THREE.MeshStandardMaterial({ color: lightColor, emissive: lightColor, emissiveIntensity: 3 }));
+      spot.position.y = h + 8; g.add(spot);
       scene.add(g);
     }
 
-    /* ═══════════════════════════════════════════
-       SOLAR PANEL UNIT
-       ═══════════════════════════════════════════ */
-    const solarPanelMat = new THREE.MeshStandardMaterial({
-      color: 0x082c4b, roughness: 0.18, metalness: 0.7,
-      emissive: 0x063b62, emissiveIntensity: 0.7,
-    });
+    /* SOLAR PANEL UNIT */
+    const solarPanelMat = new THREE.MeshStandardMaterial({ color: 0x082c4b, roughness: 0.18, metalness: 0.7, emissive: 0x063b62, emissiveIntensity: 0.7 });
     const solarFrameMat = mat(0x2a2a35, 0.5, 0.6);
 
     function solarPanelUnit(x, z, rotY = 0) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
-      g.rotation.y = rotY;
-
-      const frame = new THREE.Mesh(new THREE.BoxGeometry(28, 2, 20), solarFrameMat);
-      frame.position.y = 3; g.add(frame);
-      const panel = new THREE.Mesh(new THREE.BoxGeometry(26, 0.6, 18), solarPanelMat);
-      panel.position.y = 4.2; panel.rotation.x = -0.2; g.add(panel);
-      const legMat = mat(0x555a5e, 0.5, 0.7);
+      const g = new THREE.Group(); g.position.set(x, 5, z); g.rotation.y = rotY;
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(28, 2, 20), solarFrameMat); frame.position.y = 3; g.add(frame);
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(26, 0.6, 18), solarPanelMat); panel.position.y = 4.2; panel.rotation.x = -0.2; g.add(panel);
       const legGeo = new THREE.CylinderGeometry(0.6, 0.6, 3, 6);
+      const legMat = mat(0x555a5e, 0.5, 0.7);
       for (const lx of [-10, 10]) for (const lz of [-7, 7]) {
-        const leg = new THREE.Mesh(legGeo, legMat);
-        leg.position.set(lx, 1.5, lz); g.add(leg);
+        const leg = new THREE.Mesh(legGeo, legMat); leg.position.set(lx, 1.5, lz); g.add(leg);
       }
-
       scene.add(g);
     }
 
     /* ═══════════════════════════════════════════
-       PROPER BSS SMART SOCIETY
+       BSS SMART SOCIETY
        ═══════════════════════════════════════════ */
     function buildSociety(centerX, centerZ) {
       const SOCIETY_W = 850, SOCIETY_D = 850;
       const HALF_W = SOCIETY_W / 2, HALF_D = SOCIETY_D / 2;
       const SOCIETY_GREEN = 0x2ecc71;
-      const societyBorderMat = new THREE.MeshStandardMaterial({
-        color: SOCIETY_GREEN, emissive: SOCIETY_GREEN, emissiveIntensity: 2.4,
-        metalness: 0.6, roughness: 0.25,
-      });
+      const societyBorderMat = new THREE.MeshStandardMaterial({ color: SOCIETY_GREEN, emissive: SOCIETY_GREEN, emissiveIntensity: 2.4, metalness: 0.6, roughness: 0.25 });
 
-      const innerGround = new THREE.Mesh(
-        new THREE.BoxGeometry(SOCIETY_W - 30, 0.6, SOCIETY_D - 30),
-        mat(0xb8bcc0, 0.92)
-      );
+      const innerGround = new THREE.Mesh(new THREE.BoxGeometry(SOCIETY_W - 30, 0.6, SOCIETY_D - 30), mat(0xb8bcc0, 0.92));
       innerGround.position.set(centerX, 4.85, centerZ); scene.add(innerGround);
-
-      const grassPad = new THREE.Mesh(
-        new THREE.BoxGeometry(SOCIETY_W + 50, 0.4, SOCIETY_D + 50),
-        grassMaterial
-      );
+      const grassPad = new THREE.Mesh(new THREE.BoxGeometry(SOCIETY_W + 50, 0.4, SOCIETY_D + 50), grassMaterial);
       grassPad.position.set(centerX, 4.6, centerZ); scene.add(grassPad);
 
       const WALL_H = 14, WALL_T = 6;
@@ -1003,131 +576,106 @@ const SmartCity3D = forwardRef((props, ref) => {
       const wallR = wallL.clone(); wallR.position.x = centerX + HALF_W + 6; scene.add(wallR);
 
       for (const dx of [-1, 1]) for (const dz of [-1, 1]) {
-        const cx = centerX + dx * (HALF_W + 6);
-        const cz = centerZ + dz * (HALF_D + 6);
+        const cx = centerX + dx * (HALF_W + 6), cz = centerZ + dz * (HALF_D + 6);
         const p = new THREE.Mesh(new THREE.CylinderGeometry(8, 10, 40, 12), societyBorderMat);
         p.position.set(cx, 25, cz); scene.add(p);
-        const cap = new THREE.Mesh(new THREE.SphereGeometry(6, 12, 12),
-          new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: SOCIETY_GREEN, emissiveIntensity: 3.5 }));
+        const cap = new THREE.Mesh(new THREE.SphereGeometry(6, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: SOCIETY_GREEN, emissiveIntensity: 3.5 }));
         cap.position.set(cx, 48, cz); scene.add(cap);
       }
 
-      const gateX = centerX, gateZ = centerZ + HALF_D + 6;
       const gateLeft = new THREE.Mesh(new THREE.BoxGeometry(10, 30, 12), societyBorderMat);
-      gateLeft.position.set(gateX - 50, 20, gateZ); scene.add(gateLeft);
-      const gateRight = gateLeft.clone(); gateRight.position.x = gateX + 50; scene.add(gateRight);
+      gateLeft.position.set(centerX - 50, 20, centerZ + HALF_D + 6); scene.add(gateLeft);
+      const gateRight = gateLeft.clone(); gateRight.position.x = centerX + 50; scene.add(gateRight);
       const gateTop = new THREE.Mesh(new THREE.BoxGeometry(120, 8, 12), societyBorderMat);
-      gateTop.position.set(gateX, 34, gateZ); scene.add(gateTop);
+      gateTop.position.set(centerX, 34, centerZ + HALF_D + 6); scene.add(gateTop);
 
       const towerRows = 4, towerCols = 3, innerMargin = 100;
-      const usableW = SOCIETY_W - innerMargin * 2;
-      const usableD = SOCIETY_D - innerMargin * 2;
-
+      const usableW = SOCIETY_W - innerMargin * 2, usableD = SOCIETY_D - innerMargin * 2;
       for (let r = 0; r < towerRows; r++) {
         for (let c = 0; c < towerCols; c++) {
           const tx = centerX - usableW / 2 + (c + 0.5) * (usableW / towerCols);
           const tz = centerZ - usableD / 2 + (r + 0.5) * (usableD / towerRows);
-          const w = 28 + Math.random() * 14;
-          const d = 28 + Math.random() * 14;
-          const h = 180 + Math.random() * 180;
-          const color = TOWER_COLORS[Math.floor(Math.random() * TOWER_COLORS.length)];
-          tallTower(tx, tz, w, h, d, color);
+          const w = 28 + Math.random() * 14, d = 28 + Math.random() * 14, h = 180 + Math.random() * 180;
+          tallTower(tx, tz, w, h, d, TOWER_COLORS[Math.floor(Math.random() * TOWER_COLORS.length)]);
         }
       }
 
-      const solarZ = centerZ + HALF_D - 60;
-      for (let i = 0; i < 6; i++) solarPanelUnit(centerX - 250 + i * 100, solarZ, 0);
-
-      const solarZ2 = centerZ - HALF_D + 60;
-      for (let i = 0; i < 6; i++) solarPanelUnit(centerX - 250 + i * 100, solarZ2, Math.PI);
+      for (let i = 0; i < 6; i++) solarPanelUnit(centerX - 250 + i * 100, centerZ + HALF_D - 60, 0);
+      for (let i = 0; i < 6; i++) solarPanelUnit(centerX - 250 + i * 100, centerZ - HALF_D + 60, Math.PI);
 
       board("BSS SMART SOCIETY", centerX, 5, centerZ + HALF_D + 100, 280, 18, SOCIETY_GREEN);
-
-      for (let i = 0; i < 20; i++) {
-        const tx = centerX + (Math.random() - 0.5) * (SOCIETY_W - 200);
-        const tz = centerZ + (Math.random() - 0.5) * (SOCIETY_D - 200);
-        tree(tx, tz, 0.6 + Math.random() * 0.5);
-      }
     }
 
     const SOCIETY_X = -600, SOCIETY_Z = 600;
     buildSociety(SOCIETY_X, SOCIETY_Z);
-
     const societyGroup = new THREE.Group();
     societyGroup.position.set(SOCIETY_X, 0, SOCIETY_Z);
     clickable.push({ object: societyGroup, type: "society", name: "BSS Smart Society" });
 
     /* ═══════════════════════════════════════════
-       GLB BUILDINGS — MAIN
+       GLB BUILDINGS
        ═══════════════════════════════════════════ */
     bld("/american_high_school.glb", 300, [-600, -600], "school", "American High School", 0x1a5490);
     bld("/low_poly_hospital.glb", 280, [600, -600], "hospital", "Smart Hospital", 0xc0392b);
     bld("/us_bank_tower.glb", 360, [600, 600], "bank", "State Bank", 0x8e44ad);
     bld("/simple_farm_free.glb", 520, [1800, -600], "farm", "Smart Eco Farm", 0x27ae60);
-
-    /* ✅ NAYI: Liverpool Event Hall (purani Great Hall ki jagah) */
     bld("/liverpool_street_station_south_entrance.glb", 420, [600, 1800], "newHall", "Liverpool Event Hall", 0xd4a017);
-
     bld("/gas_station.glb", 380, [1800, 1750], "gasStation", "Gas Station · Car Wash", 0xc0392b);
-    buildingBorder(1800, 1750, 520, 520, 0xc0392b);
-
     bld("/office.glb", 380, [1800, 600], "sewageCompany", "Sewage & Gas Co.", 0x2ecc71);
     bld("/brutalist_building.glb", 300, [2200, 600], "sewageCompanyOld", "Old Office Building", 0x34495e);
     bld("/national_archives_research_center.glb", 480, [-1800, 1800], "cultureCenter", "Culture Center", 0xf39c12);
-
-    /* ═══════════════════════════════════════════
-       NAYI GLB BUILDINGS
-       ═══════════════════════════════════════════ */
-
-    /* Near Bank — bank ke border ke andar */
     bld("/nearbank.glb", 240, [750, 750], "nearBank", "Near Bank Building", 0xf39c12);
-
-    /* Commercial Building — bank ke paas */
     bld("/commercial_building_concept.glb", 340, [1000, 400], "commercial", "Commercial Building", 0x3498db);
-
-    /* City Power Supply Co. — city ke andar */
     bld("/power-suply-companey.glb", 380, [-1600, 800], "powerCompany", "City Power Supply Co.", 0xf1c40f);
 
-    /* ═══════════════════════════════════════════
-       TECH & SCI-FI DISTRICT — NAYA AREA
-       Center: [-4000, -1600]
-       ═══════════════════════════════════════════ */
+    /* SCI-FI DISTRICT (paas) */
+    bld("/beautifultowerbuilding.glb", 520, [-3200, -1000], "beautifulTower", "Beautiful Tower", 0x22cfff);
+    bld("/twobuildingsneedspace.glb", 560, [-3200, -1800], "twinTowers", "Twin Sci-Fi Towers", 0xaa8ae0);
+    bld("/sci-fi_building_9.glb", 440, [-3200, -200], "scifi9", "Sci-Fi Building 9", 0x66ff99);
+    bld("/sci-fi_building_10.glb", 440, [-3200, -2600], "scifi10", "Sci-Fi Building 10", 0xff66dd);
 
-    /* Sci-Fi buildings */
-    bld("/beautifultowerbuilding.glb", 520, [-4000, -1200], "beautifulTower", "Beautiful Tower", 0x22cfff);
-    bld("/twobuildingsneedspace.glb", 560, [-4000, -2000], "twinTowers", "Twin Sci-Fi Towers", 0xaa8ae0);
-    bld("/sci-fi_building_9.glb", 440, [-4000, -400], "scifi9", "Sci-Fi Building 9", 0x66ff99);
-    bld("/sci-fi_building_10.glb", 440, [-4000, -2800], "scifi10", "Sci-Fi Building 10", 0xff66dd);
+    /* SCIFI small border (chota) */
+    const scifiPad = new THREE.Mesh(new THREE.BoxGeometry(1200, 0.6, 3000), mat(0x1a2a3a, 0.9));
+    scifiPad.position.set(-3200, 4.85, -1400); scene.add(scifiPad);
 
-    /* Sci-Fi Zone — plaza + border */
-    const scifiPad = new THREE.Mesh(
-      new THREE.BoxGeometry(1400, 0.6, 3400),
-      mat(0x1a2a3a, 0.9)
-    );
-    scifiPad.position.set(-4000, 4.85, -1600);
-    scene.add(scifiPad);
-
-    const scifiBorderMat = new THREE.MeshStandardMaterial({
-      color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5,
-      metalness: 0.7, roughness: 0.2,
-    });
-
-    const sF = new THREE.Mesh(new THREE.BoxGeometry(1400, 1.8, 6), scifiBorderMat);
-    sF.position.set(-4000, 6.5, -1600 + 1700); scene.add(sF);
-    const sB = sF.clone(); sB.position.z = -1600 - 1700; scene.add(sB);
-    const sL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, 3400), scifiBorderMat);
-    sL.position.set(-4000 - 700, 6.5, -1600); scene.add(sL);
-    const sR = sL.clone(); sR.position.x = -4000 + 700; scene.add(sR);
+    const scifiBorderMat = new THREE.MeshStandardMaterial({ color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5, metalness: 0.7, roughness: 0.2 });
+    const sF = new THREE.Mesh(new THREE.BoxGeometry(1200, 1.8, 5), scifiBorderMat);
+    sF.position.set(-3200, 6.5, -1400 + 1500); scene.add(sF);
+    const sB = sF.clone(); sB.position.z = -1400 - 1500; scene.add(sB);
+    const sL = new THREE.Mesh(new THREE.BoxGeometry(5, 1.8, 3000), scifiBorderMat);
+    sL.position.set(-3200 - 600, 6.5, -1400); scene.add(sL);
+    const sR = sL.clone(); sR.position.x = -3200 + 600; scene.add(sR);
 
     for (const dx of [-1, 1]) for (const dz of [-1, 1]) {
-      const cx = -4000 + dx * 700;
-      const cz = -1600 + dz * 1700;
-      const p = new THREE.Mesh(new THREE.CylinderGeometry(5, 6, 35, 12), scifiBorderMat);
-      p.position.set(cx, 22, cz); scene.add(p);
-      const cap = new THREE.Mesh(new THREE.SphereGeometry(4.5, 12, 12),
-        new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x22cfff, emissiveIntensity: 3.5 }));
-      cap.position.set(cx, 42, cz); scene.add(cap);
+      const cx = -3200 + dx * 600, cz = -1400 + dz * 1500;
+      const p = new THREE.Mesh(new THREE.CylinderGeometry(4, 5, 30, 12), scifiBorderMat);
+      p.position.set(cx, 20, cz); scene.add(p);
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(4, 10, 10), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x22cfff, emissiveIntensity: 3.5 }));
+      cap.position.set(cx, 37, cz); scene.add(cap);
     }
+
+    /* WASTE COLLECTOR (near Marriage Hall) */
+    const wcGroup = new THREE.Group();
+    wcGroup.position.set(900, 5, 1400);
+    scene.add(wcGroup);
+    const wcPad = new THREE.Mesh(new THREE.BoxGeometry(280, 0.8, 280), mat(0x2a3a2e, 0.95));
+    wcPad.position.y = 0.4; wcGroup.add(wcPad);
+    const wcBorderMat = new THREE.MeshStandardMaterial({ color: 0x2ecc71, emissive: 0x2ecc71, emissiveIntensity: 2.5, metalness: 0.6, roughness: 0.2 });
+    const wcF = new THREE.Mesh(new THREE.BoxGeometry(280, 1.5, 4), wcBorderMat); wcF.position.set(0, 1, 140); wcGroup.add(wcF);
+    const wcB = wcF.clone(); wcB.position.z = -140; wcGroup.add(wcB);
+    const wcL = new THREE.Mesh(new THREE.BoxGeometry(4, 1.5, 280), wcBorderMat); wcL.position.set(-140, 1, 0); wcGroup.add(wcL);
+    const wcR = wcL.clone(); wcR.position.x = 140; wcGroup.add(wcR);
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+      const bin = new THREE.Group();
+      bin.position.set(-80 + c * 80, 0, -80 + r * 80);
+      const body = new THREE.Mesh(new THREE.BoxGeometry(40, 26, 40), mat(0x2ecc71, 0.5, 0.5));
+      body.position.y = 13; bin.add(body);
+      const lid = new THREE.Mesh(new THREE.BoxGeometry(42, 2, 42), mat(0x1a1a1a, 0.6, 0.3));
+      lid.position.y = 27; bin.add(lid);
+      wcGroup.add(bin);
+    }
+    board("WASTE COLLECTOR", 900, 5, 1600, 260, 16, 0x2ecc71);
+    clickable.push({ object: wcGroup, type: "wasteCollector", name: "Waste Collector Point" });
 
     /* Boards */
     board("AMERICAN HIGH SCHOOL", -600, 5, -950, 200, 14, 0x1a5490);
@@ -1142,41 +690,30 @@ const SmartCity3D = forwardRef((props, ref) => {
     board("CULTURE CENTER", -1800, 5, 2400, 260, 18, 0xf39c12);
     board("CITY POWER SUPPLY CO.", -1600, 5, 400, 300, 16, 0xf1c40f);
     board("AI TRAFFIC CONTROLLER", 0, 5, 300, 190, 14);
-    board("TECH & SCI-FI DISTRICT", -4000, 5, -1600 + 1800, 420, 20, 0x22cfff);
-    board("BEAUTIFUL TOWER", -4000, 5, -1200 + 320, 260, 16, 0x22cfff);
-    board("TWIN SCI-FI TOWERS", -4000, 5, -2000 + 320, 280, 16, 0xaa8ae0);
-    board("SCI-FI BUILDING 9", -4000, 5, -400 + 320, 260, 16, 0x66ff99);
-    board("SCI-FI BUILDING 10", -4000, 5, -2800 + 320, 260, 16, 0xff66dd);
+    board("TECH & SCI-FI DISTRICT", -3200, 5, 200, 400, 20, 0x22cfff);
+    board("BEAUTIFUL TOWER", -3200, 5, -1000 + 320, 260, 16, 0x22cfff);
+    board("TWIN SCI-FI TOWERS", -3200, 5, -1800 + 320, 280, 16, 0xaa8ae0);
+    board("SCI-FI BUILDING 9", -3200, 5, -200 + 320, 260, 16, 0x66ff99);
+    board("SCI-FI BUILDING 10", -3200, 5, -2600 + 320, 260, 16, 0xff66dd);
 
     /* Shops */
     function shop(x, z, scale = 1.4, name) {
-      loader.load(
-        "/dagashiya_shop_japanese_old_snack_shop.glb",
-        (g) => {
-          const sm = g.scene;
-          prep(sm, 50 * scale);
-          sm.position.set(x, 5, z);
-          scene.add(sm);
-          clickable.push({ object: sm, type: "shop", name: name || "Dagashiya Snack Shop" });
-        },
-        undefined,
-        (err) => console.warn("Shop GLB failed", err)
-      );
+      loader.load("/dagashiya_shop_japanese_old_snack_shop.glb", (g) => {
+        const sm = g.scene; prep(sm, 50 * scale); sm.position.set(x, 5, z); scene.add(sm);
+        clickable.push({ object: sm, type: "shop", name: name || "Dagashiya Snack Shop" });
+      }, undefined, () => {});
     }
     shop(-1000, -600, 1.4, "School Canteen");
     shop(1000, -600, 1.4, "Hospital Canteen");
     shop(1000, 600, 1.4, "Bank Shop");
 
-    /* POWER SUPPLY */
+    /* POWER SUPPLY — KEEP BORDER */
     const powerZone = new THREE.Group();
-    powerZone.position.set(-3600, 0, 3600);
-    scene.add(powerZone);
+    powerZone.position.set(-3600, 0, 3600); scene.add(powerZone);
     board("POWER SUPPLY (SMART-CITY)", -3600, 5, 4500, 420, 20, 0x0a4d5c);
     const powerPad = new THREE.Mesh(new THREE.BoxGeometry(1600, 1, 1300), mat(0x1d3a2e, 0.92));
     powerPad.position.y = 4.2; powerZone.add(powerPad);
-    const powerBorderMat = new THREE.MeshStandardMaterial({
-      color: 0x00e0ff, emissive: 0x00cfff, emissiveIntensity: 2.2, metalness: 0.7, roughness: 0.2,
-    });
+    const powerBorderMat = new THREE.MeshStandardMaterial({ color: 0x00e0ff, emissive: 0x00cfff, emissiveIntensity: 2.2, metalness: 0.7, roughness: 0.2 });
     const pbF = new THREE.Mesh(new THREE.BoxGeometry(1600, 1.6, 5), powerBorderMat);
     pbF.position.set(0, 6.5, -650); powerZone.add(pbF);
     const pbB = pbF.clone(); pbB.position.z = 650; powerZone.add(pbB);
@@ -1184,27 +721,16 @@ const SmartCity3D = forwardRef((props, ref) => {
     pbL.position.set(-800, 6.5, 0); powerZone.add(pbL);
     const pbR = pbL.clone(); pbR.position.x = 800; powerZone.add(pbR);
 
-    loader.load("/old_antenna.glb", (g) => {
-      const a = g.scene; prep(a, 360); a.position.set(-550, 5, 0); powerZone.add(a);
-      clickable.push({ object: a, type: "antenna", name: "Old Antenna" });
-    }, undefined, () => {});
-    loader.load("/antena.glb", (g) => {
-      const a = g.scene; prep(a, 270); a.position.set(-280, 5, -100); powerZone.add(a);
-      clickable.push({ object: a, type: "antenna", name: "Antenna 1" });
-    }, undefined, () => {});
-    loader.load("/antena.glb", (g) => {
-      const a = g.scene; prep(a, 230); a.position.set(-720, 5, 100); powerZone.add(a);
-      clickable.push({ object: a, type: "antenna", name: "Antenna 2" });
-    }, undefined, () => {});
+    loader.load("/old_antenna.glb", (g) => { const a = g.scene; prep(a, 360); a.position.set(-550, 5, 0); powerZone.add(a); clickable.push({ object: a, type: "antenna", name: "Old Antenna" }); }, undefined, () => {});
+    loader.load("/antena.glb", (g) => { const a = g.scene; prep(a, 270); a.position.set(-280, 5, -100); powerZone.add(a); clickable.push({ object: a, type: "antenna", name: "Antenna 1" }); }, undefined, () => {});
+    loader.load("/antena.glb", (g) => { const a = g.scene; prep(a, 230); a.position.set(-720, 5, 100); powerZone.add(a); clickable.push({ object: a, type: "antenna", name: "Antenna 2" }); }, undefined, () => {});
 
-    const turbines = [];
-    s.turbines = turbines;
+    const turbines = []; s.turbines = turbines;
     const turbTowerMat = mat(0xeeeeee, 0.4, 0.3);
     const turbTowerGeo = new THREE.CylinderGeometry(0.85, 1.4, 68, 6);
     const turbBladeGeo = new THREE.BoxGeometry(2, 27, 0.85);
     function turbine(x, z, sc = 1) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z); g.scale.setScalar(sc);
+      const g = new THREE.Group(); g.position.set(x, 5, z); g.scale.setScalar(sc);
       const t = new THREE.Mesh(turbTowerGeo, turbTowerMat); t.position.y = 34; g.add(t);
       const blades = new THREE.Group(); blades.position.y = 68;
       for (let i = 0; i < 3; i++) {
@@ -1213,9 +739,8 @@ const SmartCity3D = forwardRef((props, ref) => {
       }
       g.add(blades); powerZone.add(g); turbines.push(blades);
     }
-    for (let row = 0; row < 4; row++)
-      for (let col = 0; col < 4; col++)
-        turbine(-650 + col * 200, -600 + row * 220, 1 + (row % 3) * 0.08);
+    for (let row = 0; row < 4; row++) for (let col = 0; col < 4; col++)
+      turbine(-650 + col * 200, -600 + row * 220, 1 + (row % 3) * 0.08);
 
     const solarPark = new THREE.Group();
     solarPark.position.set(500, 0, 0); powerZone.add(solarPark);
@@ -1233,34 +758,21 @@ const SmartCity3D = forwardRef((props, ref) => {
       }
       solarPark.add(g);
     }
-    for (let i = 0; i < 5; i++) {
-      solarArray(-160, -480 + i * 220, 280, 180, 2, 4);
-      solarArray(160, -480 + i * 220, 280, 180, 2, 4);
-    }
+    for (let i = 0; i < 5; i++) { solarArray(-160, -480 + i * 220, 280, 180, 2, 4); solarArray(160, -480 + i * 220, 280, 180, 2, 4); }
     const solarControl = new THREE.Mesh(new THREE.BoxGeometry(36, 58, 28), mat(0x15536a, 0.25, 0.35));
     solarControl.position.set(0, 38, 0); solarPark.add(solarControl);
-    const solarScreen = new THREE.Mesh(new THREE.BoxGeometry(22, 13, 0.6),
-      new THREE.MeshStandardMaterial({ color: 0x04151d, emissive: 0x20d9ff, emissiveIntensity: 2.6 }));
+    const solarScreen = new THREE.Mesh(new THREE.BoxGeometry(22, 13, 0.6), new THREE.MeshStandardMaterial({ color: 0x04151d, emissive: 0x20d9ff, emissiveIntensity: 2.6 }));
     solarScreen.position.set(0, 42, -14.4); solarPark.add(solarScreen);
 
-    const batteryRings = [];
-    s.batteryRings = batteryRings;
-    const batteryPositions = [
-      [-500, 850], [-370, 850], [-240, 850], [-110, 850], [20, 850],
-      [-500, 980], [-370, 980], [-240, 980], [-110, 980], [20, 980],
-    ];
+    const batteryRings = []; s.batteryRings = batteryRings;
+    const batteryPositions = [[-500, 850], [-370, 850], [-240, 850], [-110, 850], [20, 850], [-500, 980], [-370, 980], [-240, 980], [-110, 980], [20, 980]];
     batteryPositions.forEach((pos, i) => {
       loader.load("/battery.glb", (g) => {
-        const b = g.scene;
-        prep(b, 60);
-        b.position.set(pos[0], 6, pos[1]);
-        b.rotation.y = Math.PI / 2;
+        const b = g.scene; prep(b, 60); b.position.set(pos[0], 6, pos[1]); b.rotation.y = Math.PI / 2;
         powerZone.add(b);
         const rMat = new THREE.MeshStandardMaterial({ color: 0x22ff9d, emissive: 0x22ff9d, emissiveIntensity: 1.5 });
         const r = new THREE.Mesh(new THREE.TorusGeometry(28, 0.8, 6, 16), rMat);
-        r.rotation.x = Math.PI / 2;
-        r.position.set(pos[0], 7, pos[1]);
-        powerZone.add(r);
+        r.rotation.x = Math.PI / 2; r.position.set(pos[0], 7, pos[1]); powerZone.add(r);
         batteryRings.push(rMat);
         clickable.push({ object: b, type: "battery", name: "Battery " + (i + 1) });
       }, undefined, () => {});
@@ -1272,107 +784,76 @@ const SmartCity3D = forwardRef((props, ref) => {
     board("FILTRATION SYSTEM", 3600, 5, -2700, 380, 18, 0x22cfff);
     const filtPad = new THREE.Mesh(new THREE.BoxGeometry(950, 1, 950), mat(0x1a2836, 0.95));
     filtPad.position.y = 4.2; filtZone.add(filtPad);
-    const filtBorderMat = new THREE.MeshStandardMaterial({
-      color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5, metalness: 0.6, roughness: 0.2,
-    });
-    const fzF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.8, 6), filtBorderMat);
-    fzF.position.set(0, 6.5, -475); filtZone.add(fzF);
+    const filtBorderMat = new THREE.MeshStandardMaterial({ color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5, metalness: 0.6, roughness: 0.2 });
+    const fzF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.8, 6), filtBorderMat); fzF.position.set(0, 6.5, -475); filtZone.add(fzF);
     const fzB = fzF.clone(); fzB.position.z = 475; filtZone.add(fzB);
-    const fzL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, 950), filtBorderMat);
-    fzL.position.set(-475, 6.5, 0); filtZone.add(fzL);
+    const fzL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, 950), filtBorderMat); fzL.position.set(-475, 6.5, 0); filtZone.add(fzL);
     const fzR = fzL.clone(); fzR.position.x = 475; filtZone.add(fzR);
 
-    const filtBoxGroup = new THREE.Group();
-    filtBoxGroup.position.set(0, 5, 0); filtZone.add(filtBoxGroup);
+    const filtBoxGroup = new THREE.Group(); filtBoxGroup.position.set(0, 5, 0); filtZone.add(filtBoxGroup);
     const filtBase = new THREE.Mesh(new THREE.BoxGeometry(220, 4, 220), mat(0x2c3e50, 0.7, 0.3));
     filtBase.position.y = 2; filtBoxGroup.add(filtBase);
-    const glassMat = new THREE.MeshStandardMaterial({
-      color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 0.5,
-      metalness: 0.3, roughness: 0.15, transparent: true, opacity: 0.35, side: THREE.DoubleSide,
-    });
-    const wallFront = new THREE.Mesh(new THREE.BoxGeometry(220, 110, 3), glassMat);
-    wallFront.position.set(0, 57, 110); filtBoxGroup.add(wallFront);
+    const glassMat = new THREE.MeshStandardMaterial({ color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 0.5, metalness: 0.3, roughness: 0.15, transparent: true, opacity: 0.35, side: THREE.DoubleSide });
+    const wallFront = new THREE.Mesh(new THREE.BoxGeometry(220, 110, 3), glassMat); wallFront.position.set(0, 57, 110); filtBoxGroup.add(wallFront);
     const wallBack = wallFront.clone(); wallBack.position.z = -110; filtBoxGroup.add(wallBack);
-    const wallLeft = new THREE.Mesh(new THREE.BoxGeometry(3, 110, 220), glassMat);
-    wallLeft.position.set(-110, 57, 0); filtBoxGroup.add(wallLeft);
+    const wallLeft = new THREE.Mesh(new THREE.BoxGeometry(3, 110, 220), glassMat); wallLeft.position.set(-110, 57, 0); filtBoxGroup.add(wallLeft);
     const wallRight = wallLeft.clone(); wallRight.position.x = 110; filtBoxGroup.add(wallRight);
-    const roofMat = new THREE.MeshStandardMaterial({
-      color: 0x2c3e50, emissive: 0x22cfff, emissiveIntensity: 0.3,
-      metalness: 0.6, roughness: 0.25, transparent: true, opacity: 0.75,
-    });
-    const roof = new THREE.Mesh(new THREE.BoxGeometry(230, 3, 230), roofMat);
-    roof.position.y = 114; filtBoxGroup.add(roof);
+    const roofMat = new THREE.MeshStandardMaterial({ color: 0x2c3e50, emissive: 0x22cfff, emissiveIntensity: 0.3, metalness: 0.6, roughness: 0.25, transparent: true, opacity: 0.75 });
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(230, 3, 230), roofMat); roof.position.y = 114; filtBoxGroup.add(roof);
 
     loader.load("/skid_filtration_system.glb", (g) => {
-      const m = g.scene;
-      prep(m, 160);
-      m.position.set(0, 6, 0);
-      filtBoxGroup.add(m);
+      const m = g.scene; prep(m, 160); m.position.set(0, 6, 0); filtBoxGroup.add(m);
       clickable.push({ object: m, type: "filtrationMachine", name: "Filtration Machine" });
-    }, undefined, () => console.warn("Filtration GLB missing"));
+    }, undefined, () => {});
 
-    const waterParticles = [];
-    s.waterParticles = waterParticles;
+    const waterParticles = []; s.waterParticles = waterParticles;
     for (let i = 0; i < 30; i++) {
-      const p = new THREE.Mesh(new THREE.SphereGeometry(1.2, 6, 6),
-        new THREE.MeshStandardMaterial({ color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5 }));
+      const p = new THREE.Mesh(new THREE.SphereGeometry(1.2, 6, 6), new THREE.MeshStandardMaterial({ color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5 }));
       p.position.set((Math.random() - 0.5) * 190, 20 + Math.random() * 80, (Math.random() - 0.5) * 190);
       filtBoxGroup.add(p);
       waterParticles.push({ mesh: p, speed: 0.4 + Math.random() * 0.6 });
     }
 
-    /* FERTILIZER */
+    /* FERTILIZER — KEEP BORDER */
     const fertZone = new THREE.Group();
     fertZone.position.set(-3600, 0, -3600); scene.add(fertZone);
     board("AI FERTILIZER SYSTEM", -3600, 5, -2700, 420, 22, 0x8e44ad);
     const fertPad = new THREE.Mesh(new THREE.BoxGeometry(950, 1, 950), mat(0x2a1e3a, 0.95));
     fertPad.position.y = 4.2; fertZone.add(fertPad);
-    const fertBorderMat = new THREE.MeshStandardMaterial({
-      color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 2.2, metalness: 0.6, roughness: 0.2,
-    });
-    const ftF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.8, 6), fertBorderMat);
-    ftF.position.set(0, 6.5, -475); fertZone.add(ftF);
+    const fertBorderMat = new THREE.MeshStandardMaterial({ color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 2.2, metalness: 0.6, roughness: 0.2 });
+    const ftF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.8, 6), fertBorderMat); ftF.position.set(0, 6.5, -475); fertZone.add(ftF);
     const ftB = ftF.clone(); ftB.position.z = 475; fertZone.add(ftB);
-    const ftL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, 950), fertBorderMat);
-    ftL.position.set(-475, 6.5, 0); fertZone.add(ftL);
+    const ftL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, 950), fertBorderMat); ftL.position.set(-475, 6.5, 0); fertZone.add(ftL);
     const ftR = ftL.clone(); ftR.position.x = 475; fertZone.add(ftR);
     const fertOffice = new THREE.Mesh(new THREE.BoxGeometry(60, 80, 60), mat(0x4a2c6b, 0.3, 0.4));
     fertOffice.position.set(0, 45, 0); fertZone.add(fertOffice);
-    const fertOfficeUpper = new THREE.Mesh(new THREE.BoxGeometry(50, 24, 50),
-      new THREE.MeshStandardMaterial({ color: 0x2a1e3a, emissive: 0x8e44ad, emissiveIntensity: 1.5, metalness: 0.5, roughness: 0.15 }));
+    const fertOfficeUpper = new THREE.Mesh(new THREE.BoxGeometry(50, 24, 50), new THREE.MeshStandardMaterial({ color: 0x2a1e3a, emissive: 0x8e44ad, emissiveIntensity: 1.5, metalness: 0.5, roughness: 0.15 }));
     fertOfficeUpper.position.set(0, 97, 0); fertZone.add(fertOfficeUpper);
-    const fertBeacon = new THREE.Mesh(new THREE.SphereGeometry(5, 14, 14),
-      new THREE.MeshStandardMaterial({ color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 3.5 }));
+    const fertBeacon = new THREE.Mesh(new THREE.SphereGeometry(5, 14, 14), new THREE.MeshStandardMaterial({ color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 3.5 }));
     fertBeacon.position.set(0, 118, 0); fertZone.add(fertBeacon);
     for (const cx of [-200, -100, 100, 200]) {
       const tank = new THREE.Mesh(new THREE.CylinderGeometry(22, 26, 60, 16), mat(0x5a3e7d, 0.4, 0.35));
       tank.position.set(cx, 30, -350); fertZone.add(tank);
       const cap = new THREE.Mesh(new THREE.SphereGeometry(22, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2), mat(0x7a5a9d, 0.3, 0.5));
       cap.position.set(cx, 60, -350); fertZone.add(cap);
-      const light = new THREE.Mesh(new THREE.SphereGeometry(2.5, 10, 10),
-        new THREE.MeshStandardMaterial({ color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 3 }));
+      const light = new THREE.Mesh(new THREE.SphereGeometry(2.5, 10, 10), new THREE.MeshStandardMaterial({ color: 0xb266ff, emissive: 0xb266ff, emissiveIntensity: 3 }));
       light.position.set(cx, 72, -350); fertZone.add(light);
     }
 
-    /* WASTE MANAGEMENT */
+    /* WASTE MANAGEMENT — KEEP BORDER */
     const wasteZone = new THREE.Group();
     wasteZone.position.set(3600, 0, 3600); scene.add(wasteZone);
     board("WASTE MANAGEMENT", 3600, 5, 4500, 380, 18, 0x2ecc71);
     const wastePad = new THREE.Mesh(new THREE.BoxGeometry(950, 1, 950), mat(0x2a3a2e, 0.95));
     wastePad.position.y = 4.2; wasteZone.add(wastePad);
-    const wasteBorderMat = new THREE.MeshStandardMaterial({
-      color: 0x2ecc71, emissive: 0x2ecc71, emissiveIntensity: 2.2, metalness: 0.6, roughness: 0.2,
-    });
-    const wbF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.4, 5), wasteBorderMat);
-    wbF.position.set(0, 6.5, -475); wasteZone.add(wbF);
+    const wasteBorderMat = new THREE.MeshStandardMaterial({ color: 0x2ecc71, emissive: 0x2ecc71, emissiveIntensity: 2.2, metalness: 0.6, roughness: 0.2 });
+    const wbF = new THREE.Mesh(new THREE.BoxGeometry(950, 1.4, 5), wasteBorderMat); wbF.position.set(0, 6.5, -475); wasteZone.add(wbF);
     const wbB = wbF.clone(); wbB.position.z = 475; wasteZone.add(wbB);
-    const wbL = new THREE.Mesh(new THREE.BoxGeometry(5, 1.4, 950), wasteBorderMat);
-    wbL.position.set(-475, 6.5, 0); wasteZone.add(wbL);
+    const wbL = new THREE.Mesh(new THREE.BoxGeometry(5, 1.4, 950), wasteBorderMat); wbL.position.set(-475, 6.5, 0); wasteZone.add(wbL);
     const wbR = wbL.clone(); wbR.position.x = 475; wasteZone.add(wbR);
 
     function wasteDumpster(x, z) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
+      const g = new THREE.Group(); g.position.set(x, 5, z);
       const body = new THREE.Mesh(new THREE.BoxGeometry(38, 22, 26), mat(0x2ecc71, 0.5, 0.5));
       body.position.y = 11; g.add(body);
       const lid = new THREE.Mesh(new THREE.BoxGeometry(40, 2, 28), mat(0x1a1a1a, 0.6, 0.3));
@@ -1383,86 +864,64 @@ const SmartCity3D = forwardRef((props, ref) => {
       wasteZone.add(g);
       clickable.push({ object: g, type: "wasteBin", name: "Waste Container" });
     }
-    for (let row = 0; row < 3; row++)
-      for (let col = 0; col < 4; col++)
-        wasteDumpster(-280 + col * 190, -300 + row * 220);
+    for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++)
+      wasteDumpster(-280 + col * 190, -300 + row * 220);
 
     const recycleMachine = new THREE.Mesh(new THREE.BoxGeometry(120, 100, 120), mat(0x1a8a4e, 0.4, 0.5));
     recycleMachine.position.set(0, 55, 0); wasteZone.add(recycleMachine);
-    const recycleTop = new THREE.Mesh(new THREE.BoxGeometry(100, 20, 100),
-      new THREE.MeshStandardMaterial({ color: 0x0a5a2e, emissive: 0x2ecc71, emissiveIntensity: 1.5, metalness: 0.5, roughness: 0.2 }));
+    const recycleTop = new THREE.Mesh(new THREE.BoxGeometry(100, 20, 100), new THREE.MeshStandardMaterial({ color: 0x0a5a2e, emissive: 0x2ecc71, emissiveIntensity: 1.5, metalness: 0.5, roughness: 0.2 }));
     recycleTop.position.set(0, 115, 0); wasteZone.add(recycleTop);
-    const recycleRing = new THREE.Mesh(new THREE.TorusGeometry(80, 2, 8, 32),
-      new THREE.MeshStandardMaterial({ color: 0x2ecc71, emissive: 0x2ecc71, emissiveIntensity: 2.5 }));
+    const recycleRing = new THREE.Mesh(new THREE.TorusGeometry(80, 2, 8, 32), new THREE.MeshStandardMaterial({ color: 0x2ecc71, emissive: 0x2ecc71, emissiveIntensity: 2.5 }));
     recycleRing.rotation.x = Math.PI / 2; recycleRing.position.set(0, 10, 0); wasteZone.add(recycleRing);
 
     /* TRUCKS */
     function buildTruck(c1, c2, label, txtColor) {
       const truck = new THREE.Group();
-      const box = new THREE.Mesh(new THREE.BoxGeometry(100, 68, 44), mat(c1, 0.4, 0.3));
-      box.position.y = 45; truck.add(box);
-      const cabin = new THREE.Mesh(new THREE.BoxGeometry(38, 44, 44), mat(c2, 0.4, 0.4));
-      cabin.position.set(65, 35, 0); truck.add(cabin);
-      const win = new THREE.Mesh(new THREE.BoxGeometry(2, 20, 34),
-        new THREE.MeshStandardMaterial({ color: 0x8be8ff, transparent: true, opacity: 0.7, roughness: 0.1, metalness: 0.3 }));
+      const box = new THREE.Mesh(new THREE.BoxGeometry(100, 68, 44), mat(c1, 0.4, 0.3)); box.position.y = 45; truck.add(box);
+      const cabin = new THREE.Mesh(new THREE.BoxGeometry(38, 44, 44), mat(c2, 0.4, 0.4)); cabin.position.set(65, 35, 0); truck.add(cabin);
+      const win = new THREE.Mesh(new THREE.BoxGeometry(2, 20, 34), new THREE.MeshStandardMaterial({ color: 0x8be8ff, transparent: true, opacity: 0.7, roughness: 0.1, metalness: 0.3 }));
       win.position.set(84, 42, 0); truck.add(win);
       const wm = mat(0x0c1012, 0.6, 0.1);
       const wg = new THREE.CylinderGeometry(12, 12, 8, 12);
       for (const wx of [-36, 36, 60]) for (const wz of [-20, 20]) {
-        const w = new THREE.Mesh(wg, wm);
-        w.rotation.x = Math.PI / 2; w.position.set(wx, 12, wz); truck.add(w);
+        const w = new THREE.Mesh(wg, wm); w.rotation.x = Math.PI / 2; w.position.set(wx, 12, wz); truck.add(w);
       }
-      const chassis = new THREE.Mesh(new THREE.BoxGeometry(135, 8, 42), darkMaterial);
-      chassis.position.set(16, 18, 0); truck.add(chassis);
-      const canvas = document.createElement("canvas");
-      canvas.width = 1400; canvas.height = 280;
+      const chassis = new THREE.Mesh(new THREE.BoxGeometry(135, 8, 42), darkMaterial); chassis.position.set(16, 18, 0); truck.add(chassis);
+      const canvas = document.createElement("canvas"); canvas.width = 1400; canvas.height = 280;
       const ctx = canvas.getContext("2d");
       ctx.fillStyle = txtColor; ctx.fillRect(0, 0, 1400, 280);
-      ctx.fillStyle = "#fff"; ctx.font = "bold 115px Arial";
-      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillStyle = "#fff"; ctx.font = "bold 115px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
       const lines = label.split("|");
       if (lines.length === 2) { ctx.fillText(lines[0], 700, 80); ctx.fillText(lines[1], 700, 200); }
       else ctx.fillText(label, 700, 140);
-      const tex = new THREE.CanvasTexture(canvas);
-      tex.colorSpace = THREE.SRGBColorSpace;
+      const tex = new THREE.CanvasTexture(canvas); tex.colorSpace = THREE.SRGBColorSpace;
       const tMat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
-      const t1 = new THREE.Mesh(new THREE.PlaneGeometry(95, 48), tMat);
-      t1.position.set(0, 45, 22.5); truck.add(t1);
-      const t2 = new THREE.Mesh(new THREE.PlaneGeometry(95, 48), tMat);
-      t2.position.set(0, 45, -22.5); t2.rotation.y = Math.PI; truck.add(t2);
-      const warn = new THREE.Mesh(new THREE.SphereGeometry(3, 10, 10),
-        new THREE.MeshStandardMaterial({ color: 0xff8a00, emissive: 0xff8a00, emissiveIntensity: 3 }));
+      const t1 = new THREE.Mesh(new THREE.PlaneGeometry(95, 48), tMat); t1.position.set(0, 45, 22.5); truck.add(t1);
+      const t2 = new THREE.Mesh(new THREE.PlaneGeometry(95, 48), tMat); t2.position.set(0, 45, -22.5); t2.rotation.y = Math.PI; truck.add(t2);
+      const warn = new THREE.Mesh(new THREE.SphereGeometry(3, 10, 10), new THREE.MeshStandardMaterial({ color: 0xff8a00, emissive: 0xff8a00, emissiveIntensity: 3 }));
       warn.position.set(0, 82, 0); truck.add(warn);
       return { truck, warn };
     }
 
     const g1 = buildTruck(0x3498db, 0x2980b9, "WASTE|MANAGEMENT", "#3498db");
-    const garbageTruck = g1.truck; scene.add(garbageTruck);
-    s.trucks.garbage = garbageTruck; s.garbageWarn = g1.warn;
-
+    const garbageTruck = g1.truck; scene.add(garbageTruck); s.trucks.garbage = garbageTruck; s.garbageWarn = g1.warn;
     const g2 = buildTruck(0xb266ff, 0x7a3b9d, "AI FERTILIZER", "#8e44ad");
-    const fertTruck1 = g2.truck; scene.add(fertTruck1);
-    s.trucks.fert1 = fertTruck1; s.fertWarn1 = g2.warn;
-
+    const fertTruck1 = g2.truck; scene.add(fertTruck1); s.trucks.fert1 = fertTruck1; s.fertWarn1 = g2.warn;
     const g3 = buildTruck(0xd8b3ff, 0x8e44ad, "AI FERTILIZER", "#8e44ad");
-    const fertTruck2 = g3.truck; scene.add(fertTruck2);
-    s.trucks.fert2 = fertTruck2; s.fertWarn2 = g3.warn;
+    const fertTruck2 = g3.truck; scene.add(fertTruck2); s.trucks.fert2 = fertTruck2; s.fertWarn2 = g3.warn;
 
     /* CARS */
-    const cityCars = [];
-    s.cityCars = cityCars;
-    const carColors = [0x287ca3, 0xc83f49, 0xe1a72e, 0x5b72c9, 0x2f9d65, 0xd8d8d8, 0xd97b2a, 0x8b3ad9, 0x16a085, 0x8e44ad];
+    const cityCars = []; s.cityCars = cityCars;
+    const carColors = [0x287ca3, 0xc83f49, 0xe1a72e, 0x5b72c9, 0x2f9d65, 0xd8d8d8, 0xd97b2a, 0x8b3ad9, 0x16a085, 0x8e44ad, 0xf39c12, 0xe74c3c];
     const V_LEN = 26, V_WID = 10, V_HGT = 5.5;
     const carBodyGeo = new THREE.BoxGeometry(V_LEN, V_HGT, V_WID);
     const carHoodGeo = new THREE.BoxGeometry(V_LEN * 0.25, V_HGT * 0.55, V_WID * 0.95);
     const carCabinGeo = new THREE.BoxGeometry(V_LEN * 0.42, V_HGT * 0.85, V_WID * 0.88);
     const carWindshieldGeo = new THREE.BoxGeometry(1.8, V_HGT * 0.75, V_WID * 0.82);
-    const carWheelGeo = new THREE.CylinderGeometry(2.4, 2.4, 1.6, 12);
-    const carWheelHubGeo = new THREE.CylinderGeometry(0.9, 0.9, 1.7, 10);
+    const carWheelGeo = new THREE.CylinderGeometry(2.4, 2.4, 1.6, 10);
+    const carWheelHubGeo = new THREE.CylinderGeometry(0.9, 0.9, 1.7, 8);
     const carLightGeo = new THREE.BoxGeometry(1.5, 1.6, 1.9);
-    const carGlassMat = new THREE.MeshStandardMaterial({
-      color: 0x1a3a4a, emissive: 0x0a2535, emissiveIntensity: 0.4, roughness: 0.12, metalness: 0.5,
-    });
+    const carGlassMat = new THREE.MeshStandardMaterial({ color: 0x1a3a4a, emissive: 0x0a2535, emissiveIntensity: 0.4, roughness: 0.12, metalness: 0.5 });
     const wheelMat = mat(0x0c1012, 0.6, 0.1);
     const hubMat = mat(0xa0a8ac, 0.3, 0.7);
     const headMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff8e0, emissiveIntensity: 2.5 });
@@ -1479,10 +938,7 @@ const SmartCity3D = forwardRef((props, ref) => {
       const rw = new THREE.Mesh(carWindshieldGeo, carGlassMat); rw.position.set(-V_LEN * 0.22, 8.5, 0); g.add(rw);
       const roof = new THREE.Mesh(new THREE.BoxGeometry(V_LEN * 0.35, 0.4, V_WID * 0.6), mat(0x222222, 0.5, 0.3));
       roof.position.set(-1, 12, 0); g.add(roof);
-      for (const wp of [
-        [V_LEN * 0.32, V_WID * 0.48], [V_LEN * 0.32, -V_WID * 0.48],
-        [-V_LEN * 0.32, V_WID * 0.48], [-V_LEN * 0.32, -V_WID * 0.48],
-      ]) {
+      for (const wp of [[V_LEN * 0.32, V_WID * 0.48], [V_LEN * 0.32, -V_WID * 0.48], [-V_LEN * 0.32, V_WID * 0.48], [-V_LEN * 0.32, -V_WID * 0.48]]) {
         const w = new THREE.Mesh(carWheelGeo, wheelMat); w.rotation.x = Math.PI / 2; w.position.set(wp[0], 2.8, wp[1]); g.add(w);
         const h = new THREE.Mesh(carWheelHubGeo, hubMat); h.rotation.x = Math.PI / 2; h.position.set(wp[0], 2.8, wp[1]); g.add(h);
       }
@@ -1520,23 +976,19 @@ const SmartCity3D = forwardRef((props, ref) => {
       cityCars.push({ car: c, route, progress, direction: dir, speed, baseSpeed: speed, laneOffset });
     }
 
-    for (let i = 0; i < 8; i++) spawnCar(outerRoute, i / 8, 1, 0.38, -25);
-    for (let i = 0; i < 8; i++) spawnCar(outerRoute, i / 8 + 0.5, -1, 0.38, 25);
-    for (let i = 0; i < 6; i++) spawnCar(midRoute, i / 6, 1, 0.35, -22);
-    for (let i = 0; i < 6; i++) spawnCar(midRoute, i / 6 + 0.5, -1, 0.35, 22);
-    for (let i = 0; i < 5; i++) spawnCar(innerRoute, i / 5, 1, 0.32, -20);
-    for (let i = 0; i < 5; i++) spawnCar(innerRoute, i / 5 + 0.5, -1, 0.32, 20);
+    /* 50 CARS — zyada traffic */
+    for (let i = 0; i < 12; i++) spawnCar(outerRoute, i / 12, 1, 0.32, -30);
+    for (let i = 0; i < 12; i++) spawnCar(outerRoute, i / 12 + 0.5, -1, 0.32, 30);
+    for (let i = 0; i < 8; i++) spawnCar(midRoute, i / 8, 1, 0.28, -28);
+    for (let i = 0; i < 8; i++) spawnCar(midRoute, i / 8 + 0.5, -1, 0.28, 28);
+    for (let i = 0; i < 5; i++) spawnCar(innerRoute, i / 5, 1, 0.25, -26);
+    for (let i = 0; i < 5; i++) spawnCar(innerRoute, i / 5 + 0.5, -1, 0.25, 26);
 
     /* PEOPLE */
-    const people = [];
-    s.people = people;
+    const people = []; s.people = people;
     const skinColors = [0xf2c9a0, 0xd9a373, 0xa06a3c, 0x6b4a2f, 0xffd8b8];
-    const shirtColors = [
-      0xe74c3c, 0x3498db, 0x2ecc71, 0xf1c40f, 0x9b59b6,
-      0x1abc9c, 0xe67e22, 0x34495e, 0xc0392b, 0x16a085,
-      0xd35400, 0x8e44ad, 0x27ae60, 0x2980b9, 0xd81b60,
-    ];
-    const pantsColors = [0x2c3e50, 0x34495e, 0x1a252f, 0x4a4a4a, 0x3d3d3d];
+    const shirtColors = [0xe74c3c, 0x3498db, 0x2ecc71, 0xf1c40f, 0x9b59b6, 0x1abc9c, 0xe67e22, 0x34495e, 0xc0392b, 0x16a085];
+    const pantsColors = [0x2c3e50, 0x34495e, 0x1a252f, 0x4a4a4a];
 
     function makePerson() {
       const g = new THREE.Group();
@@ -1563,60 +1015,88 @@ const SmartCity3D = forwardRef((props, ref) => {
         p.g.position.set(cx + Math.cos(angle) * r, 5, cz + Math.sin(angle) * r);
         p.g.rotation.y = angle;
         scene.add(p.g);
-        people.push({
-          obj: p.g, legL: p.legL, legR: p.legR, armL: p.armL, armR: p.armR,
-          cx, cz, r, angle,
-          dir: Math.random() > 0.5 ? 1 : -1,
-          speed: 0.005 + Math.random() * 0.008,
-          phase: Math.random() * Math.PI * 2,
-        });
+        people.push({ obj: p.g, legL: p.legL, legR: p.legR, armL: p.armL, armR: p.armR, cx, cz, r, angle, dir: Math.random() > 0.5 ? 1 : -1, speed: 0.005 + Math.random() * 0.008, phase: Math.random() * Math.PI * 2 });
       }
     }
-    spawnPeople(-600, -600, 12, 180);
-    spawnPeople(600, -600, 12, 180);
-    spawnPeople(-600, 600, 20, 350);
-    spawnPeople(600, 600, 10, 180);
-    spawnPeople(1800, -600, 8, 240);
-    spawnPeople(600, 1800, 12, 220);
-    spawnPeople(1800, 1750, 6, 160);
-    spawnPeople(0, 0, 6, 130);
-    spawnPeople(-1800, 1800, 14, 200);
-    spawnPeople(-4000, -1600, 16, 800);
+    spawnPeople(-600, -600, 10, 180);
+    spawnPeople(600, -600, 10, 180);
+    spawnPeople(-600, 600, 16, 350);
+    spawnPeople(600, 600, 8, 180);
+    spawnPeople(1800, -600, 6, 240);
+    spawnPeople(600, 1800, 10, 220);
+    spawnPeople(0, 0, 5, 130);
+    spawnPeople(-1800, 1800, 12, 200);
 
-    /* NATURE FILL */
-    for (let i = 0; i < 900; i++) {
+    /* TOURISTS in Sci-Fi District */
+    const tourists = []; s.tourists = tourists;
+    const touristShirtColors = [0xff6b6b, 0xffdd57, 0xff8fab, 0xa29bfe, 0x74b9ff, 0xfd79a8, 0x00cec9, 0xff9f43];
+
+    function makeTourist() {
+      const g = new THREE.Group();
+      const skin = skinColors[Math.floor(Math.random() * skinColors.length)];
+      const shirt = touristShirtColors[Math.floor(Math.random() * touristShirtColors.length)];
+      const skinMat = mat(skin, 0.9);
+      const shirtMat = mat(shirt, 0.85);
+      const shortMat = mat(0xf5c84b, 0.85);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(1.8, 6, 5), skinMat); head.position.y = 9; g.add(head);
+      const body = new THREE.Mesh(new THREE.BoxGeometry(2.8, 5, 1.8), shirtMat); body.position.y = 5.5; g.add(body);
+      const legL = new THREE.Mesh(new THREE.BoxGeometry(1, 4, 1), shortMat); legL.position.set(-0.7, 2, 0); g.add(legL);
+      const legR = new THREE.Mesh(new THREE.BoxGeometry(1, 4, 1), shortMat); legR.position.set(0.7, 2, 0); g.add(legR);
+      const armL = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.6, 0.8), shirtMat); armL.position.set(-2.1, 5.5, 0); g.add(armL);
+      const armR = new THREE.Mesh(new THREE.BoxGeometry(0.8, 3.6, 0.8), shirtMat); armR.position.set(2.1, 5.5, 0); g.add(armR);
+      /* Camera in hand */
+      const cam = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.2, 0.8), mat(0x222222, 0.4, 0.7));
+      cam.position.set(0, 5.5, 1.5); g.add(cam);
+      /* Hat */
+      const hat = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 0.4, 12), mat(0xf5c84b, 0.7));
+      hat.position.y = 11; g.add(hat);
+      const hatTop = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 1, 12), mat(0xf5c84b, 0.7));
+      hatTop.position.y = 11.7; g.add(hatTop);
+      return { g, legL, legR, armL, armR };
+    }
+
+    function spawnTourists(count) {
+      for (let i = 0; i < count; i++) {
+        const p = makeTourist();
+        const angle = Math.random() * Math.PI * 2;
+        const r = 300 + Math.random() * 400;
+        p.g.position.set(-3200 + Math.cos(angle) * r, 5, -1400 + Math.sin(angle) * r);
+        p.g.rotation.y = angle;
+        scene.add(p.g);
+        tourists.push({ obj: p.g, legL: p.legL, legR: p.legR, armL: p.armL, armR: p.armR, cx: -3200, cz: -1400, r, angle, dir: Math.random() > 0.5 ? 1 : -1, speed: 0.004 + Math.random() * 0.006, phase: Math.random() * Math.PI * 2 });
+      }
+    }
+    spawnTourists(15);
+
+    /* Tourist message scheduling — 30 sec baad, 1 sec ke liye */
+    let touristMsgShown = false;
+    setTimeout(() => {
+      if (!touristMsgShown) {
+        touristMsgShown = true;
+        onTouristMessage?.("Tourist has been joined our city");
+      }
+    }, 30000);
+
+    /* NATURE FILL — 400 trees (kam) */
+    for (let i = 0; i < 400; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
-      if (isFree(x, z)) tree(x, z, 0.7 + Math.random() * 0.7);
+      if (isFree(x, z)) tree(x, z, 0.8 + Math.random() * 0.6);
     }
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 150; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
       if (isFree(x, z)) bush(x, z, 0.7 + Math.random() * 0.6);
     }
-    for (let i = 0; i < 250; i++) {
-      const x = (Math.random() - 0.5) * 9000;
-      const z = (Math.random() - 0.5) * 9000;
-      if (isFree(x, z)) rock(x, z, 0.6 + Math.random() * 0.8);
-    }
-    for (let i = 0; i < 800; i++) {
-      const x = (Math.random() - 0.5) * 9000;
-      const z = (Math.random() - 0.5) * 9000;
-      if (isFree(x, z)) grassTuft(x, z);
-    }
 
     /* SIMULATION */
-    const sim = createCitySimulation({
-      onTrafficUpdate, onSimTime, onCycleUpdate, onAiMessage, onAiReason,
-    });
+    const sim = createCitySimulation({ onTrafficUpdate, onSimTime, onCycleUpdate, onAiMessage, onAiReason });
     s.sim = sim;
 
     const garbageRoute = [
       [-1200, -1200], [0, -1200], [1200, -1200], [1200, 0], [1200, 1200],
-      [0, 1200], [-1200, 1200], [-1200, 0], [-1200, -1200],
-      [-2400, -1200], [-2400, 0], [-2400, 1200], [-2400, 2400],
-      [0, 2400], [1200, 2400], [2400, 2400], [2400, 1200],
-      [2400, 0], [2400, -1200], [1200, -1200], [0, -1200], [-1200, -1200],
+      [900, 1400], [600, 1800], [600, 2400], [1200, 2400], [2400, 2400],
+      [2400, 1200], [2400, 0], [2400, -1200], [1200, -1200], [0, -1200], [-1200, -1200],
       [-2400, -1200], [-2400, -2400], [-1200, -2400], [0, -2400],
       [1200, -2400], [2400, -2400], [3600, -3600], [3600, -2400],
       [3600, -1200], [3600, 0], [3600, 1200], [3600, 2400], [3600, 3600],
@@ -1674,19 +1154,16 @@ const SmartCity3D = forwardRef((props, ref) => {
             case "commercial": type = "COMMERCIAL"; text = "Commercial building concept."; break;
             case "farm": type = "AGRICULTURE"; text = "Sustainable farming."; break;
             case "newHall": type = "EVENT VENUE"; text = "Liverpool Event Hall."; break;
-            case "antenna": type = "ANTENNA"; text = "Communication antenna."; break;
-            case "battery": type = "BATTERY"; text = "Energy storage."; break;
-            case "shop": type = "SHOP"; text = "Snack shop."; break;
             case "gasStation": type = "AUTOMOTIVE"; text = "Gas station + car wash."; break;
             case "powerCompany": type = "UTILITY"; text = "City power supply company."; break;
             case "sewageCompany": type = "INDUSTRIAL"; text = "Sewage & gas company."; break;
             case "sewageCompanyOld": type = "INDUSTRIAL"; text = "Old office building."; break;
             case "cultureCenter": type = "CULTURAL"; text = "Culture Center."; break;
             case "beautifulTower": type = "SKYLINE"; text = "Beautiful tower — sci-fi district."; break;
-            case "twinTowers": type = "SKYLINE"; text = "Twin sci-fi towers — need space."; break;
+            case "twinTowers": type = "SKYLINE"; text = "Twin sci-fi towers."; break;
             case "scifi9": type = "SCI-FI"; text = "Sci-Fi Building 9."; break;
             case "scifi10": type = "SCI-FI"; text = "Sci-Fi Building 10."; break;
-            case "filtrationMachine": type = "FILTRATION MACHINE"; text = "Skid filtration system."; break;
+            case "wasteCollector": type = "MUNICIPAL"; text = "Waste collection point near Marriage Hall."; break;
             case "wasteBin": type = "WASTE"; text = "Waste container."; break;
           }
           onPanel({ title, type, text });
@@ -1713,12 +1190,13 @@ const SmartCity3D = forwardRef((props, ref) => {
 
       sim.tick(delta);
 
+      /* Cars — always on road */
       for (const d of cityCars) {
         let speed = d.baseSpeed;
         if (sim.getState() === 1 && d.route === outerRoute) {
           const p = routePoint(d.route, d.progress);
           const dist = Math.sqrt(p.x * p.x + p.z * p.z);
-          speed *= dist < 1100 ? 0.3 : 0.6;
+          speed *= dist < 1100 ? 0.4 : 0.7;
         }
         d.progress += speed / 3200;
         if (d.progress > 1) d.progress -= 1;
@@ -1732,6 +1210,7 @@ const SmartCity3D = forwardRef((props, ref) => {
         d.car.rotation.y = angle;
       }
 
+      /* People */
       for (const p of people) {
         p.angle += p.speed * p.dir;
         if (p.angle > Math.PI * 2) p.angle -= Math.PI * 2;
@@ -1746,6 +1225,22 @@ const SmartCity3D = forwardRef((props, ref) => {
         p.armR.rotation.x = swing * 0.7;
       }
 
+      /* Tourists */
+      for (const p of tourists) {
+        p.angle += p.speed * p.dir;
+        if (p.angle > Math.PI * 2) p.angle -= Math.PI * 2;
+        if (p.angle < 0) p.angle += Math.PI * 2;
+        p.obj.position.x = p.cx + Math.cos(p.angle) * p.r;
+        p.obj.position.z = p.cz + Math.sin(p.angle) * p.r;
+        p.obj.rotation.y = p.angle + (p.dir > 0 ? Math.PI / 2 : -Math.PI / 2);
+        const swing = Math.sin(t * 6 + p.phase) * 0.5;
+        p.legL.rotation.x = swing;
+        p.legR.rotation.x = -swing;
+        p.armL.rotation.x = -swing * 0.8;
+        p.armR.rotation.x = swing * 0.8;
+      }
+
+      /* Water */
       for (const wp of waterParticles) {
         wp.mesh.position.y += wp.speed * 0.4;
         if (wp.mesh.position.y > 105) {
@@ -1753,9 +1248,9 @@ const SmartCity3D = forwardRef((props, ref) => {
           wp.mesh.position.x = (Math.random() - 0.5) * 180;
           wp.mesh.position.z = (Math.random() - 0.5) * 180;
         }
-        wp.mesh.material.emissiveIntensity = 1.5 + Math.sin(t * 4) * 0.6;
       }
 
+      /* Traffic lights */
       for (const l of trafficLights) {
         const cyc = (t + l.phase) % 12;
         l.r.material.emissiveIntensity = 0;
@@ -1772,15 +1267,15 @@ const SmartCity3D = forwardRef((props, ref) => {
         }
       }
 
-      moveTruck(garbageTruck, garbageRoute, garbageState, delta, 0.22);
-      moveTruck(fertTruck1, fertRoute1, fert1State, delta, 0.20);
-      moveTruck(fertTruck2, fertRoute2, fert2State, delta, 0.18);
+      moveTruck(garbageTruck, garbageRoute, garbageState, delta, 0.18);
+      moveTruck(fertTruck1, fertRoute1, fert1State, delta, 0.16);
+      moveTruck(fertTruck2, fertRoute2, fert2State, delta, 0.15);
       const blink = Math.floor(t * 2) % 2 === 0 ? 3 : 0.5;
       if (s.garbageWarn) s.garbageWarn.material.emissiveIntensity = blink;
       if (s.fertWarn1) s.fertWarn1.material.emissiveIntensity = blink;
       if (s.fertWarn2) s.fertWarn2.material.emissiveIntensity = blink;
 
-      if (fc % 2 === 0) for (const bl of turbines) bl.rotation.z = t * 2.4;
+      if (fc % 3 === 0) for (const bl of turbines) bl.rotation.z = t * 2.4;
 
       radar.rotation.z = t * 1.7;
       controllerRing.rotation.z = t * 0.5;
