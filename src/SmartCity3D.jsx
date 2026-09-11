@@ -651,30 +651,124 @@ const SmartCity3D = forwardRef((props, ref) => {
       );
     }
 
-    /* NATURE */
-    const treeTrunkMat = mat(0x6b4a2f, 0.95, 0.05);
+    /* ═══════════════════════════════════════════
+       NATURE — BADE, STYLED TREES
+       ═══════════════════════════════════════════ */
+    const treeTrunkMat = mat(0x5a3d24, 0.95, 0.05);
+    const treeTrunkMat2 = mat(0x6b4a2f, 0.95, 0.05);
     const treeLeafMat = mat(0x2d6e3d, 0.9);
     const treeLeafMat2 = mat(0x3a8a4c, 0.9);
     const treeLeafMat3 = mat(0x1f5a2e, 0.9);
-    const treeGeo1 = new THREE.CylinderGeometry(1.2, 1.8, 14, 5);
-    const treeGeo2 = new THREE.ConeGeometry(11, 22, 6);
-    const treeGeo3 = new THREE.SphereGeometry(9, 7, 6);
+    const treeLeafMat4 = mat(0x4a9d5a, 0.9);
+    const treeLeafMat5 = mat(0x2a8a3a, 0.9);
+
+    /* Tall tree trunk (bigger) */
+    const treeTrunkGeo1 = new THREE.CylinderGeometry(2.2, 3.5, 28, 7);
+    const treeTrunkGeo2 = new THREE.CylinderGeometry(1.8, 3, 24, 6);
+
+    /* Leaf shapes */
+    const treeLeafCone = new THREE.ConeGeometry(18, 42, 8);
+    const treeLeafConeSmall = new THREE.ConeGeometry(14, 32, 7);
+    const treeLeafSphere = new THREE.SphereGeometry(15, 9, 8);
+    const treeLeafSphereBig = new THREE.SphereGeometry(18, 10, 9);
+    const treeLeafCube = new THREE.BoxGeometry(20, 22, 20);
 
     function tree(x, z, sc = 1) {
       const g = new THREE.Group();
-      g.position.set(x, 5, z); g.scale.setScalar(sc);
-      const t = new THREE.Mesh(treeGeo1, treeTrunkMat); t.position.y = 7; g.add(t);
+      g.position.set(x, 5, z);
+      g.scale.setScalar(sc);
+
+      const trunkMat = Math.random() > 0.5 ? treeTrunkMat : treeTrunkMat2;
       const roll = Math.random();
-      if (roll < 0.45) {
-        const l = new THREE.Mesh(treeGeo2, Math.random() > 0.5 ? treeLeafMat : treeLeafMat2);
-        l.position.y = 22; g.add(l);
-      } else if (roll < 0.75) {
-        const l = new THREE.Mesh(treeGeo3, Math.random() > 0.5 ? treeLeafMat : treeLeafMat3);
-        l.position.y = 22; l.scale.set(1, 1.1, 1); g.add(l);
+      const leafRoll = Math.random();
+
+      if (roll < 0.35) {
+        /* Type 1: Tall pine — big cone */
+        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
+        t.position.y = 14; g.add(t);
+
+        const l1 = new THREE.Mesh(treeLeafCone, treeLeafMat);
+        l1.position.y = 38; g.add(l1);
+
+        const l2 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat2);
+        l2.position.y = 52;
+        l2.scale.setScalar(0.75); g.add(l2);
+
+        const l3 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat3);
+        l3.position.y = 62;
+        l3.scale.setScalar(0.5); g.add(l3);
+
+      } else if (roll < 0.6) {
+        /* Type 2: Big round tree */
+        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
+        t.position.y = 14; g.add(t);
+
+        const l = new THREE.Mesh(treeLeafSphereBig,
+          leafRoll > 0.5 ? treeLeafMat : treeLeafMat4);
+        l.position.y = 40;
+        l.scale.set(1.2, 1.1, 1.2); g.add(l);
+
+        /* Extra small spheres for detail */
+        const l2 = new THREE.Mesh(treeLeafSphere, treeLeafMat2);
+        l2.position.set(8, 34, 4);
+        l2.scale.setScalar(0.7); g.add(l2);
+
+        const l3 = new THREE.Mesh(treeLeafSphere, treeLeafMat3);
+        l3.position.set(-6, 36, -5);
+        l3.scale.setScalar(0.65); g.add(l3);
+
+      } else if (roll < 0.8) {
+        /* Type 3: Double cone — layered pine */
+        const t = new THREE.Mesh(treeTrunkGeo2, trunkMat);
+        t.position.y = 12; g.add(t);
+
+        const l1 = new THREE.Mesh(treeLeafCone, treeLeafMat5);
+        l1.position.y = 34;
+        l1.scale.setScalar(0.9); g.add(l1);
+
+        const l2 = new THREE.Mesh(treeLeafCone, treeLeafMat);
+        l2.position.y = 46;
+        l2.scale.setScalar(0.75); g.add(l2);
+
+        const l3 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat2);
+        l3.position.y = 58;
+        l3.scale.setScalar(0.55); g.add(l3);
+
+        const l4 = new THREE.Mesh(treeLeafConeSmall, treeLeafMat4);
+        l4.position.y = 68;
+        l4.scale.setScalar(0.35); g.add(l4);
+
       } else {
-        const l1 = new THREE.Mesh(treeGeo2, treeLeafMat); l1.position.y = 20; l1.scale.setScalar(0.85); g.add(l1);
-        const l2 = new THREE.Mesh(treeGeo2, treeLeafMat2); l2.position.y = 28; l2.scale.setScalar(0.7); g.add(l2);
+        /* Type 4: Wide canopy (realistic) */
+        const t = new THREE.Mesh(treeTrunkGeo1, trunkMat);
+        t.position.y = 14; g.add(t);
+
+        const l1 = new THREE.Mesh(treeLeafSphereBig, treeLeafMat);
+        l1.position.y = 42;
+        l1.scale.set(1.3, 1, 1.3); g.add(l1);
+
+        const l2 = new THREE.Mesh(treeLeafSphere, treeLeafMat2);
+        l2.position.set(10, 38, 0);
+        l2.scale.setScalar(0.85); g.add(l2);
+
+        const l3 = new THREE.Mesh(treeLeafSphere, treeLeafMat4);
+        l3.position.set(-10, 38, 0);
+        l3.scale.setScalar(0.85); g.add(l3);
+
+        const l4 = new THREE.Mesh(treeLeafSphere, treeLeafMat3);
+        l4.position.set(0, 38, 10);
+        l4.scale.setScalar(0.85); g.add(l4);
+
+        const l5 = new THREE.Mesh(treeLeafSphere, treeLeafMat5);
+        l5.position.set(0, 38, -10);
+        l5.scale.setScalar(0.85); g.add(l5);
+
+        const l6 = new THREE.Mesh(treeLeafCube, treeLeafMat2);
+        l6.position.set(0, 52, 0);
+        l6.rotation.y = Math.PI / 4;
+        l6.scale.setScalar(0.75); g.add(l6);
       }
+
       scene.add(g);
     }
 
@@ -682,10 +776,10 @@ const SmartCity3D = forwardRef((props, ref) => {
       const g = new THREE.Group();
       g.position.set(x, 5, z); g.scale.setScalar(sc);
       const colors = [0x2d6e3d, 0x3a8a4c, 0x1f5a2e, 0x4a9d5a];
-      for (let i = 0; i < 4; i++) {
-        const b = new THREE.Mesh(new THREE.SphereGeometry(3 + Math.random() * 2, 6, 5),
+      for (let i = 0; i < 5; i++) {
+        const b = new THREE.Mesh(new THREE.SphereGeometry(4 + Math.random() * 3, 7, 6),
           mat(colors[Math.floor(Math.random() * colors.length)], 0.95));
-        b.position.set((Math.random() - 0.5) * 5, 3 + Math.random() * 2, (Math.random() - 0.5) * 5);
+        b.position.set((Math.random() - 0.5) * 7, 4 + Math.random() * 3, (Math.random() - 0.5) * 7);
         g.add(b);
       }
       scene.add(g);
@@ -696,9 +790,9 @@ const SmartCity3D = forwardRef((props, ref) => {
       g.position.set(x, 5, z); g.scale.setScalar(sc);
       const colors = [0x8a8a8a, 0x6b6b6b, 0x9a9a95, 0x7a7a72];
       for (let i = 0; i < 3; i++) {
-        const r = new THREE.Mesh(new THREE.DodecahedronGeometry(2 + Math.random() * 2, 0),
+        const r = new THREE.Mesh(new THREE.DodecahedronGeometry(3 + Math.random() * 2, 0),
           mat(colors[Math.floor(Math.random() * colors.length)], 0.95));
-        r.position.set((Math.random() - 0.5) * 5, 2 + Math.random() * 1.5, (Math.random() - 0.5) * 5);
+        r.position.set((Math.random() - 0.5) * 6, 3 + Math.random() * 2, (Math.random() - 0.5) * 6);
         r.rotation.set(Math.random() * 3, Math.random() * 3, Math.random() * 3);
         g.add(r);
       }
@@ -709,9 +803,9 @@ const SmartCity3D = forwardRef((props, ref) => {
       const g = new THREE.Group();
       g.position.set(x, 5, z);
       const gm = mat(0x3a8a4c, 0.95);
-      for (let i = 0; i < 6; i++) {
-        const blade = new THREE.Mesh(new THREE.ConeGeometry(0.4, 2 + Math.random() * 1.5, 3), gm);
-        blade.position.set((Math.random() - 0.5) * 2.5, 1, (Math.random() - 0.5) * 2.5);
+      for (let i = 0; i < 7; i++) {
+        const blade = new THREE.Mesh(new THREE.ConeGeometry(0.5, 3 + Math.random() * 2, 3), gm);
+        blade.position.set((Math.random() - 0.5) * 3, 1.5, (Math.random() - 0.5) * 3);
         blade.rotation.z = (Math.random() - 0.5) * 0.4;
         g.add(blade);
       }
@@ -734,7 +828,7 @@ const SmartCity3D = forwardRef((props, ref) => {
       { x: -3600, z: 3600, r: 900 }, { x: 3600, z: -3600, r: 600 },
       { x: -3600, z: -3600, r: 600 }, { x: 3600, z: 3600, r: 600 },
       { x: -1800, z: 1800, r: 400 },
-      { x: -600, z: 600, r: 500 },   /* Society ka poora area */
+      { x: -600, z: 600, r: 500 },
     ];
     function isOnBuilding(x, z) {
       for (const o of occupiedSpots) {
@@ -746,7 +840,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     function isFree(x, z) { return !isOnRoad(x, z) && !isOnBuilding(x, z); }
 
     /* ═══════════════════════════════════════════
-       TOWER COLORS
+       TOWER COLORS (used only inside society)
        ═══════════════════════════════════════════ */
     const TOWER_COLORS = [
       0x5b9bd5, 0x4a90e2, 0x7bb3e0, 0x6ba3d9, 0x82c0e8, 0x5090d0,
@@ -829,23 +923,8 @@ const SmartCity3D = forwardRef((props, ref) => {
       scene.add(g);
     }
 
-    function buildTowerCluster(centerX, centerZ, count, spreadX, spreadZ, minH, maxH) {
-      for (let i = 0; i < count; i++) {
-        const tx = centerX + (Math.random() - 0.5) * spreadX;
-        const tz = centerZ + (Math.random() - 0.5) * spreadZ;
-        if (isOnRoad(tx, tz)) continue;
-
-        const w = 20 + Math.random() * 20;
-        const d = 20 + Math.random() * 20;
-        const h = minH + Math.random() * (maxH - minH);
-        const color = TOWER_COLORS[Math.floor(Math.random() * TOWER_COLORS.length)];
-
-        tallTower(tx, tz, w, h, d, color);
-      }
-    }
-
     /* ═══════════════════════════════════════════
-       SOLAR PANEL UNIT
+       SOLAR PANEL UNIT (used inside society)
        ═══════════════════════════════════════════ */
     const solarPanelMat = new THREE.MeshStandardMaterial({
       color: 0x082c4b,
@@ -885,6 +964,8 @@ const SmartCity3D = forwardRef((props, ref) => {
 
     /* ═══════════════════════════════════════════
        PROPER BSS SMART SOCIETY
+       (Sirf yahan towers rahenge — koi code-based
+        building bahar nahi)
        ═══════════════════════════════════════════ */
     function buildSociety(centerX, centerZ) {
       const SOCIETY_W = 850;
@@ -1029,32 +1110,9 @@ const SmartCity3D = forwardRef((props, ref) => {
     clickable.push({ object: societyGroup, type: "society", name: "BSS Smart Society" });
 
     /* ═══════════════════════════════════════════
-       TALL TOWERS — SIRF OUTER DISTRICTS
-       (school/hospital/bank ke paas NAHI)
+       ❌ CODE-BASED TOWER CLUSTERS REMOVED ❌
+       (Sirf Society ke andar towers hain)
        ═══════════════════════════════════════════ */
-
-    /* Outer ring — big skyline */
-    buildTowerCluster(-3300, -3300, 6, 500, 500, 240, 400);
-    buildTowerCluster(3300, -3300, 6, 500, 500, 240, 400);
-    buildTowerCluster(-3300, 3300, 6, 500, 500, 240, 400);
-    buildTowerCluster(3300, 3300, 6, 500, 500, 240, 400);
-
-    /* Mid-outer ring */
-    buildTowerCluster(-3300, 0, 4, 300, 400, 220, 380);
-    buildTowerCluster(3300, 0, 4, 300, 400, 220, 380);
-    buildTowerCluster(0, -3300, 4, 400, 300, 220, 380);
-    buildTowerCluster(0, 3300, 4, 400, 300, 220, 380);
-
-    /* Between main districts */
-    buildTowerCluster(-1500, -1500, 4, 400, 400, 180, 300);
-    buildTowerCluster(1500, -1500, 4, 400, 400, 180, 300);
-    buildTowerCluster(1500, 1500, 4, 400, 400, 180, 300);
-
-    /* Far outer mega towers */
-    buildTowerCluster(-4500, 0, 3, 300, 500, 300, 450);
-    buildTowerCluster(4500, 0, 3, 300, 500, 300, 450);
-    buildTowerCluster(0, -4500, 3, 500, 300, 300, 450);
-    buildTowerCluster(0, 4500, 3, 500, 300, 300, 450);
 
     /* ═══════════════════════════════════════════
        GLB BUILDINGS
@@ -1517,7 +1575,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     spawnPeople(0, 0, 6, 130);
     spawnPeople(-1800, 1800, 14, 200);
 
-    /* NATURE FILL */
+    /* NATURE FILL — bade trees */
     for (let i = 0; i < 900; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
