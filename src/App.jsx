@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import SmartCity3D from "./SmartCity3D.jsx";
+import "./ui.css";
 
 export default function App() {
   const [isNight, setIsNight] = useState(false);
@@ -27,6 +28,10 @@ export default function App() {
   const [aiReason, setAiReason] = useState({ visible: false, title: "AI ACTION LOG", text: "", result: "" });
   const [showAiBtn, setShowAiBtn] = useState(false);
 
+  /* Tourist message state */
+  const [touristMsg, setTouristMsg] = useState("");
+  const [touristMsgVisible, setTouristMsgVisible] = useState(false);
+
   const cityRef = useRef(null);
 
   useEffect(() => {
@@ -43,6 +48,12 @@ export default function App() {
     setAiMsg(msg);
     setAiMsgVisible(true);
     setTimeout(() => setAiMsgVisible(false), 4000);
+  }, []);
+
+  const showTouristMessage = useCallback((msg) => {
+    setTouristMsg(msg);
+    setTouristMsgVisible(true);
+    setTimeout(() => setTouristMsgVisible(false), 1000);  /* 1 second ke liye */
   }, []);
 
   const handleToggleMenu = () => setMenuOpen((v) => !v);
@@ -116,6 +127,7 @@ export default function App() {
           setAiReason(data);
           setShowAiBtn(!data.visible);
         }}
+        onTouristMessage={showTouristMessage}
       />
 
       <div className="ui-brand">
@@ -151,6 +163,12 @@ export default function App() {
       </div>
 
       <div className={`ai-message ${aiMsgVisible ? "show" : ""}`}>{aiMsg}</div>
+
+      {/* TOURIST MESSAGE */}
+      {touristMsgVisible && (
+        <div className="tourist-message">{touristMsg}</div>
+      )}
+
       <div className="incident-bar" dangerouslySetInnerHTML={{ __html: traffic.incident }} />
 
       {cycleVisible && (
