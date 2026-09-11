@@ -126,8 +126,8 @@ export const LOCATIONS = {
     ],
   },
   modernBuildings: {
-    key: "modernBuildings", label: "Modern Skyline (Dubai/USA)", icon: "🌆", type: "SKYLINE",
-    position: [-3600, 5, -1200], camHeight: 600, camDistance: 700,
+    key: "modernBuildings", label: "Modern Skyline", icon: "🌆", type: "SKYLINE",
+    position: [-600, 5, 600], camHeight: 700, camDistance: 800,
     cameras: [
       { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
       { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
@@ -618,21 +618,13 @@ const SmartCity3D = forwardRef((props, ref) => {
     const clickable = [];
     s.clickable = clickable;
 
-    /* GLB ground removal */
     function removeGroundFromGLB(model) {
       const toRemove = [];
       model.traverse((child) => {
         if (child.isMesh) {
           const name = (child.name || "").toLowerCase();
-          if (
-            name.includes("ground") ||
-            name.includes("floor") ||
-            name.includes("plane") ||
-            name.includes("terrain") ||
-            name.includes("grass") ||
-            name === "base" ||
-            name.includes("_base")
-          ) {
+          if (name.includes("ground") || name.includes("floor") || name.includes("plane") ||
+              name.includes("terrain") || name.includes("grass") || name === "base" || name.includes("_base")) {
             toRemove.push(child);
           }
         }
@@ -735,9 +727,6 @@ const SmartCity3D = forwardRef((props, ref) => {
       scene.add(g);
     }
 
-    /* ═══════════════════════════════════════════
-       isOnRoad() — clear = 120 units (safe from roads)
-       ═══════════════════════════════════════════ */
     function isOnRoad(x, z) {
       const clear = 120;
       for (const rz of roadZs) if (Math.abs(z - rz) < clear) return true;
@@ -747,14 +736,13 @@ const SmartCity3D = forwardRef((props, ref) => {
 
     const occupiedSpots = [
       { x: -600, z: -600, r: 260 }, { x: 600, z: -600, r: 250 },
-      { x: -600, z: 600, r: 330 }, { x: 600, z: 600, r: 300 },
+      { x: -600, z: 600, r: 320 }, { x: 600, z: 600, r: 300 },
       { x: 1800, z: -600, r: 400 }, { x: 600, z: 1800, r: 290 },
       { x: 1800, z: 1750, r: 320 }, { x: 1800, z: 600, r: 290 },
       { x: 0, z: 0, r: 130 },
       { x: -3600, z: 3600, r: 900 }, { x: 3600, z: -3600, r: 600 },
       { x: -3600, z: -3600, r: 600 }, { x: 3600, z: 3600, r: 600 },
       { x: -1800, z: 1800, r: 400 },
-      { x: -3600, z: -1200, r: 500 },  /* Modern buildings plaza */
     ];
     function isOnBuilding(x, z) {
       for (const o of occupiedSpots) {
@@ -766,104 +754,145 @@ const SmartCity3D = forwardRef((props, ref) => {
     function isFree(x, z) { return !isOnRoad(x, z) && !isOnBuilding(x, z); }
 
     /* ═══════════════════════════════════════════
-       CODE-BASED CITY BUILDINGS (for outer district)
+       NAYI PATLI, LAMBI, COLORFUL TALL BUILDINGS
+       (Dubai / USA style skyline)
        ═══════════════════════════════════════════ */
-    const buildingWindowsMat = new THREE.MeshStandardMaterial({
-      color: 0x223344, emissive: 0x88ccff, emissiveIntensity: 0.6, metalness: 0.5, roughness: 0.3,
-    });
-    const buildingWindowsMat2 = new THREE.MeshStandardMaterial({
-      color: 0x334455, emissive: 0x66aaff, emissiveIntensity: 0.5, metalness: 0.4, roughness: 0.35,
-    });
+    const TOWER_COLORS = [
+      0x5b9bd5, 0x4a90e2, 0x7bb3e0, 0x6ba3d9, 0x82c0e8, 0x5090d0,
+      0xc0629b, 0xd475a8, 0xb84f8a, 0xe087b6,
+      0xf5a623, 0xf7b955, 0xe89b3e, 0xffc866,
+      0x6cd4a0, 0x4ec39a, 0x8adbb8, 0x5bc08a,
+      0x9b7ad9, 0xaa8ae0, 0x8a66c9, 0xbaa0e8,
+      0xe8635c, 0xd94f4a, 0xf0776b,
+      0x4a4a5c, 0x5a5a6e, 0x3d3d4e, 0x6a6a7e,
+      0xdde0e3, 0xc8ccd0, 0xb0b5bb,
+      0x22a5b8, 0x2bb8c9, 0x40c9d9,
+    ];
 
-    function cityBuilding(x, z, w, h, d, color) {
+    /* Patli, lambi, colorful tower */
+    function tallTower(x, z, w, h, d, color) {
       const g = new THREE.Group();
       g.position.set(x, 5, z);
-      const bMat = mat(color, 0.55, 0.35);
+
+      /* Main body — patla & lamba */
+      const bMat = mat(color, 0.4, 0.55);
       const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bMat);
-      body.position.y = h / 2; g.add(body);
-      const roof = new THREE.Mesh(new THREE.BoxGeometry(w + 4, 3, d + 4), mat(0x3a4448, 0.6, 0.3));
-      roof.position.y = h + 1.5; g.add(roof);
-      const winMat = Math.random() > 0.5 ? buildingWindowsMat : buildingWindowsMat2;
-      const floors = Math.max(3, Math.floor(h / 20));
-      const colsF = Math.max(3, Math.floor(w / 14));
-      const colsS = Math.max(3, Math.floor(d / 14));
-      for (let f = 0; f < floors; f++) {
-        const wy = 8 + f * (h - 12) / floors;
-        for (let c = 0; c < colsF; c++) {
-          const wx = (c - (colsF - 1) / 2) * (w / colsF) * 0.85;
-          const wf = new THREE.Mesh(new THREE.BoxGeometry(4.5, 6, 0.5), winMat);
-          wf.position.set(wx, wy, d / 2 + 0.3); g.add(wf);
-          const wb = new THREE.Mesh(new THREE.BoxGeometry(4.5, 6, 0.5), winMat);
-          wb.position.set(wx, wy, -d / 2 - 0.3); g.add(wb);
-        }
-        for (let c = 0; c < colsS; c++) {
-          const wz = (c - (colsS - 1) / 2) * (d / colsS) * 0.85;
-          const wl = new THREE.Mesh(new THREE.BoxGeometry(0.5, 6, 4.5), winMat);
-          wl.position.set(-w / 2 - 0.3, wy, wz); g.add(wl);
-          const wr = new THREE.Mesh(new THREE.BoxGeometry(0.5, 6, 4.5), winMat);
-          wr.position.set(w / 2 + 0.3, wy, wz); g.add(wr);
-        }
+      body.position.y = h / 2;
+      g.add(body);
+
+      /* Top cap */
+      const capMat = mat(0x2a2a35, 0.5, 0.6);
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(w * 0.95, 6, d * 0.95), capMat);
+      cap.position.y = h + 3;
+      g.add(cap);
+
+      /* Antenna (patli) */
+      if (Math.random() > 0.3) {
+        const antH = 30 + Math.random() * 50;
+        const antMat = mat(0x9a9a9a, 0.4, 0.8);
+        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, antH, 6), antMat);
+        ant.position.y = h + 6 + antH / 2;
+        g.add(ant);
+
+        /* Red beacon */
+        const beacon = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8),
+          new THREE.MeshStandardMaterial({ color: 0xff2222, emissive: 0xff2222, emissiveIntensity: 4 }));
+        beacon.position.y = h + 6 + antH;
+        g.add(beacon);
       }
-      if (Math.random() > 0.5) {
-        const antH = 20 + Math.random() * 30;
-        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.8, antH, 6), mat(0x555a5e, 0.5, 0.7));
-        ant.position.y = h + 3 + antH / 2; g.add(ant);
-        const redLight = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8),
-          new THREE.MeshStandardMaterial({ color: 0xff2222, emissive: 0xff2222, emissiveIntensity: 3 }));
-        redLight.position.y = h + 3 + antH; g.add(redLight);
+
+      /* Windows — glass pattern */
+      const glassMat = new THREE.MeshStandardMaterial({
+        color: 0x1a2a3a,
+        emissive: 0x66ccff,
+        emissiveIntensity: 0.5,
+        metalness: 0.6,
+        roughness: 0.2,
+      });
+
+      /* Horizontal floor lines (patli) */
+      const floors = Math.max(8, Math.floor(h / 12));
+      for (let f = 1; f < floors; f++) {
+        const fy = (h / floors) * f;
+        const line = new THREE.Mesh(
+          new THREE.BoxGeometry(w + 0.5, 0.5, d + 0.5),
+          glassMat
+        );
+        line.position.y = fy;
+        g.add(line);
       }
+
+      /* Vertical accent stripes on front/back */
+      const stripeMat = new THREE.MeshStandardMaterial({
+        color: color,
+        emissive: color,
+        emissiveIntensity: 0.8,
+        metalness: 0.7,
+        roughness: 0.2,
+      });
+      const stripe1 = new THREE.Mesh(new THREE.BoxGeometry(1.2, h * 0.95, 0.6), stripeMat);
+      stripe1.position.set(-w / 2 - 0.2, h / 2, 0);
+      g.add(stripe1);
+      const stripe2 = stripe1.clone();
+      stripe2.position.x = w / 2 + 0.2;
+      g.add(stripe2);
+
+      /* Top spotlights (colorful) */
+      const lightColor = [0xff6666, 0x66ff99, 0x66aaff, 0xffdd66, 0xff66dd][Math.floor(Math.random() * 5)];
+      const spot = new THREE.Mesh(new THREE.SphereGeometry(2, 10, 10),
+        new THREE.MeshStandardMaterial({ color: lightColor, emissive: lightColor, emissiveIntensity: 3 }));
+      spot.position.y = h + 8;
+      g.add(spot);
+
       scene.add(g);
     }
 
-    /* ═══════════════════════════════════════════
-       MODERN PLAZA — grey surface INSIDE, green OUTSIDE
-       ═══════════════════════════════════════════ */
-    function modernPlaza(cx, cz, size) {
-      /* Green grass RING (below, extends beyond plaza) */
-      const grassRing = new THREE.Mesh(
-        new THREE.BoxGeometry(size + 60, 0.4, size + 60),
-        grassMaterial
-      );
-      grassRing.position.set(cx, 4.45, cz);
-      scene.add(grassRing);
+    /* Group of towers — skyline cluster */
+    function buildTowerCluster(centerX, centerZ, count, spreadX, spreadZ, minH, maxH) {
+      for (let i = 0; i < count; i++) {
+        const tx = centerX + (Math.random() - 0.5) * spreadX;
+        const tz = centerZ + (Math.random() - 0.5) * spreadZ;
+        if (isOnRoad(tx, tz)) continue;
 
-      /* Grey surface (city ground — INSIDE plaza only) */
-      const surface = new THREE.Mesh(
-        new THREE.BoxGeometry(size, 0.6, size),
-        mat(0x8a8a8a, 0.92)
-      );
-      surface.position.set(cx, 4.7, cz);
-      scene.add(surface);
+        const w = 20 + Math.random() * 20;   /* patli: 20-40 */
+        const d = 20 + Math.random() * 20;
+        const h = minH + Math.random() * (maxH - minH);
+        const color = TOWER_COLORS[Math.floor(Math.random() * TOWER_COLORS.length)];
 
-      /* Cyan glowing border around plaza */
-      const borderMat = new THREE.MeshStandardMaterial({
-        color: 0x22cfff, emissive: 0x22cfff, emissiveIntensity: 2.5,
-        metalness: 0.6, roughness: 0.2
-      });
-
-      const bF = new THREE.Mesh(new THREE.BoxGeometry(size + 8, 1.8, 6), borderMat);
-      bF.position.set(cx, 6, cz + size / 2 + 4); scene.add(bF);
-      const bB = bF.clone(); bB.position.z = cz - size / 2 - 4; scene.add(bB);
-      const bL = new THREE.Mesh(new THREE.BoxGeometry(6, 1.8, size + 8), borderMat);
-      bL.position.set(cx - size / 2 - 4, 6, cz); scene.add(bL);
-      const bR = bL.clone(); bR.position.x = cx + size / 2 + 4; scene.add(bR);
-
-      /* 4 corner pillars */
-      for (const dx of [-1, 1]) for (const dz of [-1, 1]) {
-        const p = new THREE.Mesh(
-          new THREE.CylinderGeometry(3.5, 4.5, 22, 10),
-          borderMat
-        );
-        p.position.set(cx + dx * (size / 2 + 4), 16, cz + dz * (size / 2 + 4));
-        scene.add(p);
-        const cap = new THREE.Mesh(
-          new THREE.SphereGeometry(3, 10, 10),
-          new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x22cfff, emissiveIntensity: 3 })
-        );
-        cap.position.set(cx + dx * (size / 2 + 4), 30, cz + dz * (size / 2 + 4));
-        scene.add(cap);
+        tallTower(tx, tz, w, h, d, color);
       }
     }
+
+    /* Skyline clusters — har district mein */
+    /* Around school/hospital/society/bank — tall skyline */
+    buildTowerCluster(-900, -900, 5, 300, 300, 200, 320);
+    buildTowerCluster(900, -900, 5, 300, 300, 200, 320);
+    buildTowerCluster(-900, 900, 5, 300, 300, 200, 320);
+    buildTowerCluster(900, 900, 5, 300, 300, 220, 340);
+
+    /* Outer ring — big skyline */
+    buildTowerCluster(-3300, -3300, 6, 500, 500, 240, 400);
+    buildTowerCluster(3300, -3300, 6, 500, 500, 240, 400);
+    buildTowerCluster(-3300, 3300, 6, 500, 500, 240, 400);
+    buildTowerCluster(3300, 3300, 6, 500, 500, 240, 400);
+
+    /* Mid-outer ring */
+    buildTowerCluster(-3300, 0, 4, 300, 400, 220, 380);
+    buildTowerCluster(3300, 0, 4, 300, 400, 220, 380);
+    buildTowerCluster(0, -3300, 4, 400, 300, 220, 380);
+    buildTowerCluster(0, 3300, 4, 400, 300, 220, 380);
+
+    /* Between main districts */
+    buildTowerCluster(-1500, -1500, 4, 400, 400, 180, 300);
+    buildTowerCluster(1500, -1500, 4, 400, 400, 180, 300);
+    buildTowerCluster(-1500, 1500, 4, 400, 400, 180, 300);
+    buildTowerCluster(1500, 1500, 4, 400, 400, 180, 300);
+
+    /* Long colorful towers (mega) */
+    buildTowerCluster(-4500, 0, 3, 300, 500, 300, 450);
+    buildTowerCluster(4500, 0, 3, 300, 500, 300, 450);
+    buildTowerCluster(0, -4500, 3, 500, 300, 300, 450);
+    buildTowerCluster(0, 4500, 3, 500, 300, 300, 450);
 
     /* ═══════════════════════════════════════════
        GLB BUILDINGS
@@ -871,85 +900,30 @@ const SmartCity3D = forwardRef((props, ref) => {
     /* Original main buildings */
     bld("/american_high_school.glb", 300, [-600, -600], "school", "American High School", 0x1a5490);
     bld("/low_poly_hospital.glb", 280, [600, -600], "hospital", "Smart Hospital", 0xc0392b);
-    bld("/low_poly_night_city_building_skyline.glb", 400, [-600, 600], "society", "Smart Society", 0x16a085);
+
+    /* ═══════════════════════════════════════════
+       MODERN BUILDINGS GLB — purani Society ki jagah
+       ═══════════════════════════════════════════ */
+    bld("/modernbuildings.glb", 500, [-600, 600], "modernBuildings", "Modern Skyline (Dubai/USA)", 0x22cfff, true);
+
+    /* Society ab modern buildings ke saath */
     bld("/us_bank_tower.glb", 360, [600, 600], "bank", "State Bank", 0x8e44ad);
     bld("/simple_farm_free.glb", 520, [1800, -600], "farm", "Smart Eco Farm", 0x27ae60);
     bld("/great_hall.glb", 360, [600, 1800], "marriageHall", "Marriage Hall", 0xd4a017);
     bld("/gas_station.glb", 380, [1800, 1750], "gasStation", "Gas Station · Car Wash", 0xc0392b);
     buildingBorder(1800, 1750, 520, 520, 0xc0392b);
 
-    /* Sewage zone — NEW office + old building side */
+    /* Sewage zone */
     bld("/office.glb", 380, [1800, 600], "sewageCompany", "Sewage & Gas Co.", 0x2ecc71);
     bld("/brutalist_building.glb", 300, [2200, 600], "sewageCompanyOld", "Old Office Building", 0x34495e);
 
     /* Culture Center */
     bld("/national_archives_research_center.glb", 480, [-1800, 1800], "cultureCenter", "Culture Center", 0xf39c12);
 
-    /* ═══════════════════════════════════════════
-       MODERN BUILDINGS — plaza par, road se door
-       ═══════════════════════════════════════════ */
-    const MODERN_X = -3600;
-    const MODERN_Z = -1200;
-    const MODERN_SIZE = 500;
-
-    modernPlaza(MODERN_X, MODERN_Z, MODERN_SIZE);
-
-    bld(
-      "/modernbuildings.glb",
-      380,
-      [MODERN_X, MODERN_Z],
-      "modernBuildings",
-      "Modern Skyline (Dubai/USA)",
-      0x22cfff,
-      true
-    );
-
-    board("MODERN SKYLINE (DUBAI/USA)", MODERN_X, 5, MODERN_Z - MODERN_SIZE / 2 - 150, 320, 18, 0x22cfff);
-
-    /* ═══════════════════════════════════════════
-       PURANI CODE-BASED BUILDINGS — outer district (WAPAS)
-       ═══════════════════════════════════════════ */
-    const outerBuildings = [
-      { x: -3600, z: -2400, w: 100, h: 240, d: 100, c: 0x7a8288 },
-      { x: -3400, z: -1800, w: 90, h: 260, d: 90, c: 0x808890 },
-      { x: -3500, z: -600, w: 95, h: 280, d: 95, c: 0x6e767c },
-      { x: -3400, z: 0, w: 90, h: 250, d: 90, c: 0x727a80 },
-      { x: -3500, z: 600, w: 100, h: 270, d: 100, c: 0x767e84 },
-      { x: -3400, z: 1800, w: 95, h: 260, d: 95, c: 0x7a8288 },
-      { x: -3600, z: 2400, w: 100, h: 240, d: 100, c: 0x808890 },
-      { x: 3600, z: -2400, w: 100, h: 250, d: 100, c: 0x6b7278 },
-      { x: 3400, z: -1800, w: 95, h: 270, d: 95, c: 0x7e878d },
-      { x: 3500, z: -600, w: 100, h: 260, d: 100, c: 0x767e84 },
-      { x: 3400, z: 0, w: 90, h: 280, d: 90, c: 0x7a8288 },
-      { x: 3500, z: 600, w: 95, h: 250, d: 95, c: 0x6e767c },
-      { x: 3400, z: 1800, w: 90, h: 270, d: 90, c: 0x808890 },
-      { x: 3600, z: 2400, w: 100, h: 240, d: 100, c: 0x727a80 },
-      { x: -2400, z: -3600, w: 100, h: 260, d: 100, c: 0x767e84 },
-      { x: -1200, z: -3600, w: 95, h: 240, d: 95, c: 0x7a8288 },
-      { x: 0, z: -3600, w: 100, h: 280, d: 100, c: 0x6b7278 },
-      { x: 1200, z: -3600, w: 90, h: 250, d: 90, c: 0x808890 },
-      { x: 2400, z: -3600, w: 100, h: 270, d: 100, c: 0x6e767c },
-      { x: -2400, z: 3600, w: 100, h: 250, d: 100, c: 0x7e878d },
-      { x: -1200, z: 3600, w: 95, h: 270, d: 95, c: 0x727a80 },
-      { x: 0, z: 3600, w: 100, h: 260, d: 100, c: 0x767e84 },
-      { x: 1200, z: 3600, w: 90, h: 280, d: 90, c: 0x7a8288 },
-      { x: 2400, z: 3600, w: 100, h: 240, d: 100, c: 0x6b7278 },
-      { x: -4500, z: -4500, w: 130, h: 320, d: 130, c: 0x6a7278 },
-      { x: 4500, z: -4500, w: 130, h: 340, d: 130, c: 0x767e84 },
-      { x: -4500, z: 4500, w: 130, h: 330, d: 130, c: 0x727a80 },
-      { x: 4500, z: 4500, w: 130, h: 350, d: 130, c: 0x7a8288 },
-    ];
-
-    outerBuildings.forEach(b => {
-      if (!isOnRoad(b.x, b.z)) {
-        cityBuilding(b.x, b.z, b.w, b.h, b.d, b.c);
-      }
-    });
-
     /* Boards */
     board("AMERICAN HIGH SCHOOL", -600, 5, -950, 200, 14, 0x1a5490);
     board("BSS SMART HOSPITAL", 600, 5, -950, 200, 14, 0xc0392b);
-    board("BSS SMART SOCIETY", -600, 5, 950, 200, 14, 0x16a085);
+    board("MODERN SKYLINE (DUBAI/USA)", -600, 5, 950, 320, 18, 0x22cfff);
     board("SMART CITY STATE BANK", 600, 5, 950, 200, 14, 0x8e44ad);
     board("SMART ECO FARM", 1800, 5, -950, 200, 14, 0x27ae60);
     board("MARRIAGE HALL", 600, 5, 2250, 220, 16, 0xd4a017);
@@ -975,7 +949,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
     shop(-1000, -600, 1.4, "School Canteen");
     shop(1000, -600, 1.4, "Hospital Canteen");
-    shop(-1000, 600, 1.4, "Society Shop");
+    shop(-1000, 600, 1.4, "Modern Shop");
     shop(1000, 600, 1.4, "Bank Shop");
 
     /* POWER SUPPLY */
@@ -1396,37 +1370,27 @@ const SmartCity3D = forwardRef((props, ref) => {
     spawnPeople(1800, 1750, 6, 160);
     spawnPeople(0, 0, 6, 130);
     spawnPeople(-1800, 1800, 14, 200);
-    spawnPeople(MODERN_X, MODERN_Z, 14, 180);
 
-    /* NATURE FILL — everywhere EXCEPT plaza */
+    /* NATURE FILL */
     for (let i = 0; i < 900; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
-      /* Skip plaza area */
-      const inPlaza = Math.abs(x - MODERN_X) < MODERN_SIZE / 2 + 20 &&
-                      Math.abs(z - MODERN_Z) < MODERN_SIZE / 2 + 20;
-      if (!inPlaza && isFree(x, z)) tree(x, z, 0.7 + Math.random() * 0.7);
+      if (isFree(x, z)) tree(x, z, 0.7 + Math.random() * 0.7);
     }
     for (let i = 0; i < 500; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
-      const inPlaza = Math.abs(x - MODERN_X) < MODERN_SIZE / 2 + 20 &&
-                      Math.abs(z - MODERN_Z) < MODERN_SIZE / 2 + 20;
-      if (!inPlaza && isFree(x, z)) bush(x, z, 0.7 + Math.random() * 0.6);
+      if (isFree(x, z)) bush(x, z, 0.7 + Math.random() * 0.6);
     }
     for (let i = 0; i < 250; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
-      const inPlaza = Math.abs(x - MODERN_X) < MODERN_SIZE / 2 + 20 &&
-                      Math.abs(z - MODERN_Z) < MODERN_SIZE / 2 + 20;
-      if (!inPlaza && isFree(x, z)) rock(x, z, 0.6 + Math.random() * 0.8);
+      if (isFree(x, z)) rock(x, z, 0.6 + Math.random() * 0.8);
     }
     for (let i = 0; i < 800; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
-      const inPlaza = Math.abs(x - MODERN_X) < MODERN_SIZE / 2 + 20 &&
-                      Math.abs(z - MODERN_Z) < MODERN_SIZE / 2 + 20;
-      if (!inPlaza && isFree(x, z)) grassTuft(x, z);
+      if (isFree(x, z)) grassTuft(x, z);
     }
 
     /* SIMULATION */
@@ -1492,7 +1456,6 @@ const SmartCity3D = forwardRef((props, ref) => {
           switch (item.type) {
             case "school": type = "EDUCATION"; text = "Modern high school."; break;
             case "hospital": type = "HEALTHCARE"; text = "Smart hospital."; break;
-            case "society": type = "RESIDENTIAL"; text = "Residential community."; break;
             case "bank": type = "FINANCIAL"; text = "Smart banking."; break;
             case "farm": type = "AGRICULTURE"; text = "Sustainable farming."; break;
             case "antenna": type = "ANTENNA"; text = "Communication antenna."; break;
@@ -1502,7 +1465,7 @@ const SmartCity3D = forwardRef((props, ref) => {
             case "gasStation": type = "AUTOMOTIVE"; text = "Gas station + car wash."; break;
             case "sewageCompany": type = "INDUSTRIAL"; text = "Sewage & gas company."; break;
             case "sewageCompanyOld": type = "INDUSTRIAL"; text = "Old office building."; break;
-            case "cultureCenter": type = "CULTURAL"; text = "Culture Center (National Archives)."; break;
+            case "cultureCenter": type = "CULTURAL"; text = "Culture Center."; break;
             case "modernBuildings": type = "SKYLINE"; text = "Modern Dubai/USA skyline."; break;
             case "filtrationMachine": type = "FILTRATION MACHINE"; text = "Skid filtration system."; break;
             case "wasteBin": type = "WASTE"; text = "Waste container."; break;
