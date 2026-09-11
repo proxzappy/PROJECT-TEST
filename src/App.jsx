@@ -151,7 +151,6 @@ export default function App() {
       </div>
 
       <div className={`ai-message ${aiMsgVisible ? "show" : ""}`}>{aiMsg}</div>
-
       <div className="incident-bar" dangerouslySetInnerHTML={{ __html: traffic.incident }} />
 
       {cycleVisible && (
