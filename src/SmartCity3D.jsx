@@ -734,6 +734,7 @@ const SmartCity3D = forwardRef((props, ref) => {
       { x: -3600, z: 3600, r: 900 }, { x: 3600, z: -3600, r: 600 },
       { x: -3600, z: -3600, r: 600 }, { x: 3600, z: 3600, r: 600 },
       { x: -1800, z: 1800, r: 400 },
+      { x: -600, z: 600, r: 500 },   /* Society ka poora area */
     ];
     function isOnBuilding(x, z) {
       for (const o of occupiedSpots) {
@@ -844,7 +845,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
 
     /* ═══════════════════════════════════════════
-       SOLAR PANEL (small unit)
+       SOLAR PANEL UNIT
        ═══════════════════════════════════════════ */
     const solarPanelMat = new THREE.MeshStandardMaterial({
       color: 0x082c4b,
@@ -860,24 +861,15 @@ const SmartCity3D = forwardRef((props, ref) => {
       g.position.set(x, 5, z);
       g.rotation.y = rotY;
 
-      /* Frame */
-      const frame = new THREE.Mesh(
-        new THREE.BoxGeometry(28, 2, 20),
-        solarFrameMat
-      );
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(28, 2, 20), solarFrameMat);
       frame.position.y = 3;
       g.add(frame);
 
-      /* Panel surface (tilted) */
-      const panel = new THREE.Mesh(
-        new THREE.BoxGeometry(26, 0.6, 18),
-        solarPanelMat
-      );
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(26, 0.6, 18), solarPanelMat);
       panel.position.y = 4.2;
       panel.rotation.x = -0.2;
       g.add(panel);
 
-      /* Support legs */
       const legMat = mat(0x555a5e, 0.5, 0.7);
       const legGeo = new THREE.CylinderGeometry(0.6, 0.6, 3, 6);
       for (const lx of [-10, 10]) {
@@ -892,21 +884,21 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
 
     /* ═══════════════════════════════════════════
-       PROPER SOCIETY — with border, towers, solar panels
+       PROPER BSS SMART SOCIETY
        ═══════════════════════════════════════════ */
     function buildSociety(centerX, centerZ) {
-      const SOCIETY_W = 850;      /* Width along X */
-      const SOCIETY_D = 850;      /* Depth along Z */
+      const SOCIETY_W = 850;
+      const SOCIETY_D = 850;
       const HALF_W = SOCIETY_W / 2;
       const HALF_D = SOCIETY_D / 2;
 
-      const SOCIETY_GREEN = 0x2ecc71;   /* Green border */
+      const SOCIETY_GREEN = 0x2ecc71;
       const societyBorderMat = new THREE.MeshStandardMaterial({
         color: SOCIETY_GREEN, emissive: SOCIETY_GREEN, emissiveIntensity: 2.4,
         metalness: 0.6, roughness: 0.25,
       });
 
-      /* ───── Inner ground (light concrete) ───── */
+      /* Inner ground (light concrete) */
       const innerGround = new THREE.Mesh(
         new THREE.BoxGeometry(SOCIETY_W - 30, 0.6, SOCIETY_D - 30),
         mat(0xb8bcc0, 0.92)
@@ -922,37 +914,32 @@ const SmartCity3D = forwardRef((props, ref) => {
       grassPad.position.set(centerX, 4.6, centerZ);
       scene.add(grassPad);
 
-      /* ───── Big boundary walls ───── */
+      /* Big boundary walls */
       const WALL_H = 14;
       const WALL_T = 6;
 
-      /* Front (Z+) */
       const wallF = new THREE.Mesh(new THREE.BoxGeometry(SOCIETY_W + 12, WALL_H, WALL_T), societyBorderMat);
       wallF.position.set(centerX, 5 + WALL_H / 2, centerZ + HALF_D + 6);
       scene.add(wallF);
 
-      /* Back (Z-) */
       const wallB = wallF.clone();
       wallB.position.z = centerZ - HALF_D - 6;
       scene.add(wallB);
 
-      /* Left (X-) */
       const wallL = new THREE.Mesh(new THREE.BoxGeometry(WALL_T, WALL_H, SOCIETY_D + 12), societyBorderMat);
       wallL.position.set(centerX - HALF_W - 6, 5 + WALL_H / 2, centerZ);
       scene.add(wallL);
 
-      /* Right (X+) */
       const wallR = wallL.clone();
       wallR.position.x = centerX + HALF_W + 6;
       scene.add(wallR);
 
-      /* ───── 4 corner towers (bigger) ───── */
+      /* 4 corner towers */
       for (const dx of [-1, 1]) {
         for (const dz of [-1, 1]) {
           const cx = centerX + dx * (HALF_W + 6);
           const cz = centerZ + dz * (HALF_D + 6);
 
-          /* Tower base */
           const p = new THREE.Mesh(
             new THREE.CylinderGeometry(8, 10, 40, 12),
             societyBorderMat
@@ -960,7 +947,6 @@ const SmartCity3D = forwardRef((props, ref) => {
           p.position.set(cx, 25, cz);
           scene.add(p);
 
-          /* Glowing cap */
           const cap = new THREE.Mesh(
             new THREE.SphereGeometry(6, 12, 12),
             new THREE.MeshStandardMaterial({
@@ -974,27 +960,20 @@ const SmartCity3D = forwardRef((props, ref) => {
         }
       }
 
-      /* ───── Gate entrance (front) ───── */
+      /* Gate entrance */
       const gateX = centerX;
       const gateZ = centerZ + HALF_D + 6;
-      const gateLeft = new THREE.Mesh(
-        new THREE.BoxGeometry(10, 30, 12),
-        societyBorderMat
-      );
+      const gateLeft = new THREE.Mesh(new THREE.BoxGeometry(10, 30, 12), societyBorderMat);
       gateLeft.position.set(gateX - 50, 20, gateZ);
       scene.add(gateLeft);
       const gateRight = gateLeft.clone();
       gateRight.position.x = gateX + 50;
       scene.add(gateRight);
-      const gateTop = new THREE.Mesh(
-        new THREE.BoxGeometry(120, 8, 12),
-        societyBorderMat
-      );
+      const gateTop = new THREE.Mesh(new THREE.BoxGeometry(120, 8, 12), societyBorderMat);
       gateTop.position.set(gateX, 34, gateZ);
       scene.add(gateTop);
 
-      /* ───── TALL TOWERS inside society ───── */
-      /* Layout: 4 rows x 3 columns = 12 towers */
+      /* 12 tall towers INSIDE society */
       const towerRows = 4;
       const towerCols = 3;
       const innerMargin = 100;
@@ -1015,65 +994,63 @@ const SmartCity3D = forwardRef((props, ref) => {
         }
       }
 
-      /* ───── Solar panels row (front of society) ───── */
+      /* Solar panels — front row */
       const solarZ = centerZ + HALF_D - 60;
       for (let i = 0; i < 6; i++) {
         const sx = centerX - 250 + i * 100;
         solarPanelUnit(sx, solarZ, 0);
       }
 
-      /* ───── Solar panels row (back of society) ───── */
+      /* Solar panels — back row */
       const solarZ2 = centerZ - HALF_D + 60;
       for (let i = 0; i < 6; i++) {
         const sx = centerX - 250 + i * 100;
         solarPanelUnit(sx, solarZ2, Math.PI);
       }
 
-      /* ───── Society sign board ───── */
+      /* Society sign board */
       board("BSS SMART SOCIETY", centerX, 5, centerZ + HALF_D + 100, 280, 18, SOCIETY_GREEN);
 
-      /* ───── Trees inside society ───── */
+      /* Trees inside society */
       for (let i = 0; i < 20; i++) {
         const tx = centerX + (Math.random() - 0.5) * (SOCIETY_W - 200);
         const tz = centerZ + (Math.random() - 0.5) * (SOCIETY_D - 200);
-        /* Skip if too close to a tower position */
         tree(tx, tz, 0.6 + Math.random() * 0.5);
       }
     }
 
-    /* ═══════════════════════════════════════════
-       BUILD SOCIETY at [-600, 600]
-       ═══════════════════════════════════════════ */
     const SOCIETY_X = -600;
     const SOCIETY_Z = 600;
     buildSociety(SOCIETY_X, SOCIETY_Z);
 
-    /* Society building info — for click */
+    /* Society clickable */
     const societyGroup = new THREE.Group();
     societyGroup.position.set(SOCIETY_X, 0, SOCIETY_Z);
     clickable.push({ object: societyGroup, type: "society", name: "BSS Smart Society" });
 
     /* ═══════════════════════════════════════════
-       NAYI TALL TOWERS — scattered around city
+       TALL TOWERS — SIRF OUTER DISTRICTS
+       (school/hospital/bank ke paas NAHI)
        ═══════════════════════════════════════════ */
-    buildTowerCluster(-900, -900, 5, 300, 300, 200, 320);
-    buildTowerCluster(900, -900, 5, 300, 300, 200, 320);
-    buildTowerCluster(900, 900, 5, 300, 300, 220, 340);
 
+    /* Outer ring — big skyline */
     buildTowerCluster(-3300, -3300, 6, 500, 500, 240, 400);
     buildTowerCluster(3300, -3300, 6, 500, 500, 240, 400);
     buildTowerCluster(-3300, 3300, 6, 500, 500, 240, 400);
     buildTowerCluster(3300, 3300, 6, 500, 500, 240, 400);
 
+    /* Mid-outer ring */
     buildTowerCluster(-3300, 0, 4, 300, 400, 220, 380);
     buildTowerCluster(3300, 0, 4, 300, 400, 220, 380);
     buildTowerCluster(0, -3300, 4, 400, 300, 220, 380);
     buildTowerCluster(0, 3300, 4, 400, 300, 220, 380);
 
+    /* Between main districts */
     buildTowerCluster(-1500, -1500, 4, 400, 400, 180, 300);
     buildTowerCluster(1500, -1500, 4, 400, 400, 180, 300);
     buildTowerCluster(1500, 1500, 4, 400, 400, 180, 300);
 
+    /* Far outer mega towers */
     buildTowerCluster(-4500, 0, 3, 300, 500, 300, 450);
     buildTowerCluster(4500, 0, 3, 300, 500, 300, 450);
     buildTowerCluster(0, -4500, 3, 500, 300, 300, 450);
@@ -1532,7 +1509,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
     spawnPeople(-600, -600, 12, 180);
     spawnPeople(600, -600, 12, 180);
-    spawnPeople(-600, 600, 20, 350);   /* Society — zyada log */
+    spawnPeople(-600, 600, 20, 350);
     spawnPeople(600, 600, 10, 180);
     spawnPeople(1800, -600, 8, 240);
     spawnPeople(600, 1800, 12, 220);
@@ -1625,7 +1602,7 @@ const SmartCity3D = forwardRef((props, ref) => {
           switch (item.type) {
             case "school": type = "EDUCATION"; text = "Modern high school."; break;
             case "hospital": type = "HEALTHCARE"; text = "Smart hospital."; break;
-            case "society": type = "RESIDENTIAL"; text = "BSS Smart Society with 12 towers, solar panels & green border."; break;
+            case "society": type = "RESIDENTIAL"; text = "BSS Smart Society — 12 towers, solar panels, green border."; break;
             case "bank": type = "FINANCIAL"; text = "Smart banking."; break;
             case "farm": type = "AGRICULTURE"; text = "Sustainable farming."; break;
             case "antenna": type = "ANTENNA"; text = "Communication antenna."; break;
