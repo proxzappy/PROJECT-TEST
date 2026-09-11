@@ -4,7 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 /* ═══════════════════════════════════════════
-   LOCATIONS CONFIG
+   LOCATIONS CONFIG — Culture Center added
    ═══════════════════════════════════════════ */
 export const LOCATIONS = {
   school: {
@@ -107,9 +107,30 @@ export const LOCATIONS = {
       { name: "Top View", top: true },
     ],
   },
+  /* NEW: Culture Center */
+  cultureCenter: {
+    key: "cultureCenter", label: "Culture Center", icon: "🏛", type: "CULTURAL",
+    position: [-1800, 5, 1800], camHeight: 450, camDistance: 450,
+    cameras: [
+      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
+      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
+      { name: "Top View", top: true },
+    ],
+  },
+  /* UPDATED: Sewage & Gas Company */
   sewageCompany: {
-    key: "sewageCompany", label: "Sewage & Filtration Co.", icon: "🏭", type: "INDUSTRIAL",
+    key: "sewageCompany", label: "Sewage & Gas Co.", icon: "🏭", type: "INDUSTRIAL",
     position: [1800, 5, 600], camHeight: 400, camDistance: 400,
+    cameras: [
+      { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
+      { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
+      { name: "Top View", top: true },
+    ],
+  },
+  /* NEW: Modern Buildings Zone */
+  modernBuildings: {
+    key: "modernBuildings", label: "Modern Buildings (Dubai/USA)", icon: "🌆", type: "SKYLINE",
+    position: [2800, 5, 0], camHeight: 700, camDistance: 800,
     cameras: [
       { name: "Camera 1", angle: 0 }, { name: "Camera 2", angle: Math.PI },
       { name: "Camera 3", angle: Math.PI / 2 }, { name: "Camera 4", angle: -Math.PI / 2 },
@@ -595,12 +616,35 @@ const SmartCity3D = forwardRef((props, ref) => {
     s.controllerSig = controllerSig;
     scene.add(controller);
 
-    /* GLB LOADER — files loaded from root (publicDir handles copy) */
+    /* GLB LOADER */
     const loader = new GLTFLoader();
     const clickable = [];
     s.clickable = clickable;
 
-    function prep(obj, size) {
+    /* GLB ground/floor hataane ka helper */
+    function removeGroundFromGLB(model) {
+      const toRemove = [];
+      model.traverse((child) => {
+        if (child.isMesh) {
+          const name = (child.name || "").toLowerCase();
+          if (
+            name.includes("ground") ||
+            name.includes("floor") ||
+            name.includes("plane") ||
+            name.includes("terrain") ||
+            name.includes("grass") ||
+            name === "base" ||
+            name.includes("_base")
+          ) {
+            toRemove.push(child);
+          }
+        }
+      });
+      toRemove.forEach((m) => m.parent && m.parent.remove(m));
+    }
+
+    function prep(obj, size, stripGround = true) {
+      if (stripGround) removeGroundFromGLB(obj);
       const box = new THREE.Box3().setFromObject(obj);
       const sz = new THREE.Vector3(); box.getSize(sz);
       const maxD = Math.max(sz.x, sz.y, sz.z);
@@ -610,13 +654,13 @@ const SmartCity3D = forwardRef((props, ref) => {
       obj.position.x -= c.x; obj.position.z -= c.z; obj.position.y -= b2.min.y;
     }
 
-    function bld(file, size, pos, type, name, borderColor) {
+    function bld(file, size, pos, type, name, borderColor, stripGround = true) {
       const url = file.startsWith("/") ? file : "/" + file;
       loader.load(
         url,
         (g) => {
           const b = g.scene;
-          prep(b, size);
+          prep(b, size, stripGround);
           b.position.set(pos[0], 5, pos[1]);
           scene.add(b);
           clickable.push({ object: b, type, name: name || type });
@@ -709,54 +753,6 @@ const SmartCity3D = forwardRef((props, ref) => {
       scene.add(g);
     }
 
-    /* CITY BUILDINGS */
-    const buildingWindowsMat = new THREE.MeshStandardMaterial({
-      color: 0x223344, emissive: 0x88ccff, emissiveIntensity: 0.6, metalness: 0.5, roughness: 0.3,
-    });
-    const buildingWindowsMat2 = new THREE.MeshStandardMaterial({
-      color: 0x334455, emissive: 0x66aaff, emissiveIntensity: 0.5, metalness: 0.4, roughness: 0.35,
-    });
-
-    function cityBuilding(x, z, w, h, d, color) {
-      const g = new THREE.Group();
-      g.position.set(x, 5, z);
-      const bMat = mat(color, 0.55, 0.35);
-      const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bMat);
-      body.position.y = h / 2; g.add(body);
-      const roof = new THREE.Mesh(new THREE.BoxGeometry(w + 4, 3, d + 4), mat(0x3a4448, 0.6, 0.3));
-      roof.position.y = h + 1.5; g.add(roof);
-      const winMat = Math.random() > 0.5 ? buildingWindowsMat : buildingWindowsMat2;
-      const floors = Math.max(3, Math.floor(h / 20));
-      const colsF = Math.max(3, Math.floor(w / 14));
-      const colsS = Math.max(3, Math.floor(d / 14));
-      for (let f = 0; f < floors; f++) {
-        const wy = 8 + f * (h - 12) / floors;
-        for (let c = 0; c < colsF; c++) {
-          const wx = (c - (colsF - 1) / 2) * (w / colsF) * 0.85;
-          const wf = new THREE.Mesh(new THREE.BoxGeometry(4.5, 6, 0.5), winMat);
-          wf.position.set(wx, wy, d / 2 + 0.3); g.add(wf);
-          const wb = new THREE.Mesh(new THREE.BoxGeometry(4.5, 6, 0.5), winMat);
-          wb.position.set(wx, wy, -d / 2 - 0.3); g.add(wb);
-        }
-        for (let c = 0; c < colsS; c++) {
-          const wz = (c - (colsS - 1) / 2) * (d / colsS) * 0.85;
-          const wl = new THREE.Mesh(new THREE.BoxGeometry(0.5, 6, 4.5), winMat);
-          wl.position.set(-w / 2 - 0.3, wy, wz); g.add(wl);
-          const wr = new THREE.Mesh(new THREE.BoxGeometry(0.5, 6, 4.5), winMat);
-          wr.position.set(w / 2 + 0.3, wy, wz); g.add(wr);
-        }
-      }
-      if (Math.random() > 0.5) {
-        const antH = 20 + Math.random() * 30;
-        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.8, antH, 6), mat(0x555a5e, 0.5, 0.7));
-        ant.position.y = h + 3 + antH / 2; g.add(ant);
-        const redLight = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8),
-          new THREE.MeshStandardMaterial({ color: 0xff2222, emissive: 0xff2222, emissiveIntensity: 3 }));
-        redLight.position.y = h + 3 + antH; g.add(redLight);
-      }
-      scene.add(g);
-    }
-
     function isOnRoad(x, z) {
       const clear = 80;
       for (const rz of roadZs) if (Math.abs(z - rz) < clear) return true;
@@ -772,6 +768,9 @@ const SmartCity3D = forwardRef((props, ref) => {
       { x: 0, z: 0, r: 130 },
       { x: -3600, z: 3600, r: 900 }, { x: 3600, z: -3600, r: 600 },
       { x: -3600, z: -3600, r: 600 }, { x: 3600, z: 3600, r: 600 },
+      /* NEW locations added to occupied spots */
+      { x: -1800, z: 1800, r: 400 },
+      { x: 2800, z: 0, r: 800 },
     ];
     function isOnBuilding(x, z) {
       for (const o of occupiedSpots) {
@@ -782,69 +781,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     }
     function isFree(x, z) { return !isOnRoad(x, z) && !isOnBuilding(x, z); }
 
-    const cityBuildingData = [
-      { x: 900, z: 900, w: 90, h: 220, d: 90, c: 0x7a8288 },
-      { x: 300, z: 900, w: 80, h: 180, d: 80, c: 0x6b7278 },
-      { x: 900, z: 300, w: 85, h: 240, d: 85, c: 0x808890 },
-      { x: 1400, z: 900, w: 95, h: 200, d: 95, c: 0x6e767c },
-      { x: 900, z: 1400, w: 80, h: 190, d: 80, c: 0x7e878d },
-      { x: -900, z: 900, w: 90, h: 190, d: 90, c: 0x767e84 },
-      { x: -300, z: 900, w: 85, h: 210, d: 85, c: 0x727a80 },
-      { x: -900, z: 300, w: 80, h: 170, d: 80, c: 0x7a8288 },
-      { x: -1400, z: 900, w: 95, h: 230, d: 95, c: 0x6b7278 },
-      { x: -900, z: 1400, w: 85, h: 200, d: 85, c: 0x808890 },
-      { x: -900, z: -900, w: 80, h: 150, d: 80, c: 0x7a8288 },
-      { x: -300, z: -900, w: 75, h: 170, d: 75, c: 0x6e767c },
-      { x: -900, z: -300, w: 85, h: 190, d: 85, c: 0x767e84 },
-      { x: -1400, z: -900, w: 90, h: 210, d: 90, c: 0x727a80 },
-      { x: -900, z: -1400, w: 80, h: 180, d: 80, c: 0x7e878d },
-      { x: 900, z: -900, w: 80, h: 160, d: 80, c: 0x808890 },
-      { x: 300, z: -900, w: 75, h: 180, d: 75, c: 0x7a8288 },
-      { x: 900, z: -300, w: 85, h: 200, d: 85, c: 0x6b7278 },
-      { x: 1400, z: -900, w: 90, h: 220, d: 90, c: 0x767e84 },
-      { x: 900, z: -1400, w: 80, h: 190, d: 80, c: 0x727a80 },
-      { x: 2100, z: -900, w: 90, h: 200, d: 90, c: 0x6e767c },
-      { x: 2100, z: -300, w: 85, h: 220, d: 85, c: 0x7a8288 },
-      { x: 2500, z: -900, w: 95, h: 240, d: 95, c: 0x808890 },
-      { x: 2100, z: 300, w: 80, h: 180, d: 80, c: 0x727a80 },
-      { x: 900, z: 2100, w: 90, h: 210, d: 90, c: 0x767e84 },
-      { x: 300, z: 2100, w: 85, h: 190, d: 85, c: 0x7a8288 },
-      { x: 1500, z: 2100, w: 95, h: 230, d: 95, c: 0x6b7278 },
-      { x: 900, z: 2700, w: 80, h: 200, d: 80, c: 0x6e767c },
-      { x: 2500, z: 1500, w: 90, h: 220, d: 90, c: 0x808890 },
-      { x: 2500, z: 2100, w: 85, h: 200, d: 85, c: 0x727a80 },
-      { x: 2100, z: 2500, w: 90, h: 240, d: 90, c: 0x7a8288 },
-      { x: 2500, z: 900, w: 85, h: 180, d: 85, c: 0x767e84 },
-      { x: 2500, z: 300, w: 80, h: 210, d: 80, c: 0x6e767c },
-      { x: 2500, z: -300, w: 90, h: 230, d: 90, c: 0x7e878d },
-      { x: -3300, z: 0, w: 110, h: 260, d: 110, c: 0x6a7278 },
-      { x: 3300, z: 0, w: 115, h: 280, d: 115, c: 0x767e84 },
-      { x: 0, z: -3300, w: 120, h: 270, d: 120, c: 0x727a80 },
-      { x: 0, z: 3300, w: 118, h: 250, d: 118, c: 0x7a8288 },
-      { x: -3300, z: -1500, w: 100, h: 220, d: 100, c: 0x808890 },
-      { x: 3300, z: -1500, w: 105, h: 240, d: 105, c: 0x6e767c },
-      { x: -3300, z: 1500, w: 100, h: 230, d: 100, c: 0x767e84 },
-      { x: 3300, z: 1500, w: 105, h: 260, d: 105, c: 0x6a7278 },
-      { x: -1500, z: -3300, w: 100, h: 210, d: 100, c: 0x727a80 },
-      { x: 1500, z: -3300, w: 105, h: 250, d: 105, c: 0x7a8288 },
-      { x: -1500, z: 3300, w: 100, h: 240, d: 100, c: 0x808890 },
-      { x: 1500, z: 3300, w: 105, h: 220, d: 105, c: 0x6e767c },
-      { x: -1800, z: -1800, w: 90, h: 200, d: 90, c: 0x767e84 },
-      { x: 1800, z: -1800, w: 95, h: 230, d: 95, c: 0x727a80 },
-      { x: -1800, z: 1800, w: 90, h: 210, d: 90, c: 0x7a8288 },
-      { x: 1800, z: 1800, w: 95, h: 240, d: 95, c: 0x6b7278 },
-      { x: -2100, z: 0, w: 85, h: 190, d: 85, c: 0x808890 },
-      { x: 2100, z: 0, w: 85, h: 200, d: 85, c: 0x767e84 },
-      { x: 0, z: -2100, w: 90, h: 220, d: 90, c: 0x727a80 },
-      { x: 0, z: 2100, w: 90, h: 210, d: 90, c: 0x7e878d },
-    ];
-    cityBuildingData.forEach((b) => {
-      if (!isOnRoad(b.x, b.z) && isFree(b.x, b.z)) {
-        cityBuilding(b.x, b.z, b.w, b.h, b.d, b.c);
-        occupiedSpots.push({ x: b.x, z: b.z, r: Math.max(b.w, b.d) / 2 + 20 });
-      }
-    });
-
+    /* NATURE SCATTER */
     for (let i = 0; i < 900; i++) {
       const x = (Math.random() - 0.5) * 9000;
       const z = (Math.random() - 0.5) * 9000;
@@ -866,7 +803,10 @@ const SmartCity3D = forwardRef((props, ref) => {
       if (isFree(x, z)) grassTuft(x, z);
     }
 
-    /* GLB BUILDINGS (root files) */
+    /* ═══════════════════════════════════════════
+       GLB BUILDINGS
+       ═══════════════════════════════════════════ */
+    /* Original buildings */
     bld("/american_high_school.glb", 300, [-600, -600], "school", "American High School", 0x1a5490);
     bld("/low_poly_hospital.glb", 280, [600, -600], "hospital", "Smart Hospital", 0xc0392b);
     bld("/low_poly_night_city_building_skyline.glb", 400, [-600, 600], "society", "Smart Society", 0x16a085);
@@ -875,8 +815,18 @@ const SmartCity3D = forwardRef((props, ref) => {
     bld("/great_hall.glb", 360, [600, 1800], "marriageHall", "Marriage Hall", 0xd4a017);
     bld("/gas_station.glb", 380, [1800, 1750], "gasStation", "Gas Station · Car Wash", 0xc0392b);
     buildingBorder(1800, 1750, 520, 520, 0xc0392b);
-    bld("/brutalist_building.glb", 360, [1800, 600], "sewageCompany", "Sewage & Filtration Co.", 0x34495e);
 
+    /* UPDATED: Sewage zone — NEW office.glb in FRONT, brutalist shifted to SIDE */
+    bld("/office.glb", 380, [1800, 600], "sewageCompany", "Sewage & Gas Co.", 0x2ecc71);
+    bld("/brutalist_building.glb", 300, [2200, 600], "sewageCompanyOld", "Old Office Building", 0x34495e);
+
+    /* NEW: Culture Center */
+    bld("/national_archives_research_center.glb", 480, [-1800, 1800], "cultureCenter", "Culture Center", 0xf39c12);
+
+    /* NEW: Modern Dubai/USA-style buildings */
+    bld("/modernbuildings.glb", 700, [2800, 0], "modernBuildings", "Modern Buildings", 0x22cfff);
+
+    /* Boards */
     board("AMERICAN HIGH SCHOOL", -600, 5, -950, 200, 14, 0x1a5490);
     board("BSS SMART HOSPITAL", 600, 5, -950, 200, 14, 0xc0392b);
     board("BSS SMART SOCIETY", -600, 5, 950, 200, 14, 0x16a085);
@@ -884,7 +834,9 @@ const SmartCity3D = forwardRef((props, ref) => {
     board("SMART ECO FARM", 1800, 5, -950, 200, 14, 0x27ae60);
     board("MARRIAGE HALL", 600, 5, 2250, 220, 16, 0xd4a017);
     board("CAR WASH · GAS STATION", 1800, 5, 2200, 220, 16, 0xc0392b);
-    board("SEWAGE & FILTRATION CO.", 1800, 5, 300, 240, 16, 0x34495e);
+    board("SEWAGE & GAS CO.", 1800, 5, 300, 240, 16, 0x2ecc71);
+    board("CULTURE CENTER", -1800, 5, 2400, 260, 18, 0xf39c12);
+    board("MODERN SKYLINE", 2800, 5, -700, 280, 18, 0x22cfff);
     board("AI TRAFFIC CONTROLLER", 0, 5, 300, 190, 14);
 
     function shop(x, z, scale = 1.4, name) {
@@ -1323,6 +1275,8 @@ const SmartCity3D = forwardRef((props, ref) => {
     spawnPeople(600, 1800, 12, 220);
     spawnPeople(1800, 1750, 6, 160);
     spawnPeople(0, 0, 6, 130);
+    spawnPeople(-1800, 1800, 14, 200);   /* Culture Center people */
+    spawnPeople(2800, 0, 16, 260);       /* Modern Buildings people */
 
     /* SIMULATION */
     const sim = createCitySimulation({
@@ -1395,7 +1349,10 @@ const SmartCity3D = forwardRef((props, ref) => {
             case "shop": type = "SHOP"; text = "Snack shop."; break;
             case "marriageHall": type = "EVENT VENUE"; text = "Marriage hall."; break;
             case "gasStation": type = "AUTOMOTIVE"; text = "Gas station + car wash."; break;
-            case "sewageCompany": type = "INDUSTRIAL"; text = "Water treatment."; break;
+            case "sewageCompany": type = "INDUSTRIAL"; text = "Sewage & gas company."; break;
+            case "sewageCompanyOld": type = "INDUSTRIAL"; text = "Old office building."; break;
+            case "cultureCenter": type = "CULTURAL"; text = "National Archives & Research Center — Culture Center."; break;
+            case "modernBuildings": type = "SKYLINE"; text = "Modern Dubai/USA-style skyline buildings."; break;
             case "filtrationMachine": type = "FILTRATION MACHINE"; text = "Skid filtration system."; break;
             case "wasteBin": type = "WASTE"; text = "Waste container for recycling."; break;
           }
@@ -1410,7 +1367,7 @@ const SmartCity3D = forwardRef((props, ref) => {
     };
     renderer.domElement.addEventListener("click", onClick);
 
-    /* ANIMATION LOOP */
+    /* ANIMATION */
     const clock = new THREE.Clock();
     let fc = 0;
     let rafId;
